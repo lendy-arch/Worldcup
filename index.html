@@ -1071,7 +1071,14 @@ async function fetchLiveData() {
 
   } catch (err) {
     console.warn('FIFA API error:', err);
-    setApiBadge('offline', 'Offline · cached data', 'Sin conexión · datos locales');
+    // If tournament hasn't started yet, CORS/network errors are expected — show yellow not red
+    const now = new Date();
+    const tournamentStart = new Date('2026-06-11');
+    if (now < tournamentStart) {
+      setApiBadge('soon', 'Ready · activates Jun 11 2026', 'Lista · activa el 11 Jun 2026');
+    } else {
+      setApiBadge('offline', 'Offline · cached data', 'Sin conexión · datos locales');
+    }
   }
 }
 
