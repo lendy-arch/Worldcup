@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA World Cup — Results 2014·2018·2022·2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --green: #00A651;
+  --green-d: #007A3D;
+  --red: #E8212E;
+  --yellow: #F5A623;
+  --blue: #1A4FBA;
+  --ink: #111318;
+  --ink2: #3A3D46;
+  --ink3: #717480;
+  --line: #E4E6EB;
+  --line2: #C8CAD0;
+  --bg: #F5F6F8;
+  --white: #ffffff;
+  --win-bg: #E8F7EE;
+  --draw-bg: #FEF6E4;
+  --loss-bg: #FDEAEA;
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  font-size: 15px;
+}
+
+/* HEADER */
+header {
+  background: var(--white);
+  border-bottom: 3px solid var(--green);
+  padding: 0;
+}
+.header-top {
+  background: var(--ink);
+  padding: 8px 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.badge-pill {
+  background: var(--green);
+  color: #fff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+.edition-pill {
+  color: #aaa;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+.lang-toggle {
+  margin-left: auto;
+  display: flex;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.lang-btn {
+  padding: 4px 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.45);
+  cursor: pointer;
+  transition: all 0.15s;
+  border: none;
+  background: transparent;
+  text-transform: uppercase;
+}
+.lang-btn:hover { color: rgba(255,255,255,0.8); }
+.lang-btn.active { background: var(--green); color: #fff; }
+.lang-sep { width: 1px; background: rgba(255,255,255,0.15); }
+
+.header-main {
+  padding: 28px 40px 24px;
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+}
+.wc-icon {
+  width: 64px; height: 64px;
+  background: var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 30px;
+}
+.header-text h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 48px; font-weight: 800; line-height: 1;
+  color: var(--ink); letter-spacing: 0.01em; text-transform: uppercase;
+}
+.header-text h1 span { color: var(--green); }
+.header-text p {
+  margin-top: 6px; color: var(--ink3);
+  font-size: 15px; font-weight: 400; line-height: 1.5;
+}
+.editions-strip {
+  margin-left: auto; display: flex; gap: 6px;
+  align-items: center; flex-shrink: 0;
+}
+.ed-chip {
+  border: 2px solid var(--line2); border-radius: 4px;
+  padding: 6px 14px; text-align: center;
+  cursor: pointer; transition: all 0.15s;
+}
+.ed-chip:hover { border-color: var(--green); }
+.ed-chip.active { border-color: var(--green); background: var(--green); }
+.ed-chip .ed-year {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 18px; line-height: 1;
+  color: var(--ink); transition: color 0.15s;
+}
+.ed-chip.active .ed-year { color: #fff; }
+.ed-chip .ed-host {
+  font-size: 11px; color: var(--ink3); font-weight: 500;
+  margin-top: 1px; transition: color 0.15s;
+}
+.ed-chip.active .ed-host { color: rgba(255,255,255,0.8); }
+
+/* STATS BAR */
+.stats-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  display: flex; overflow-x: auto;
+}
+.stat-block {
+  flex: 1; min-width: 110px; padding: 16px 24px;
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.stat-block:last-child { border-right: none; }
+.stat-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 36px; font-weight: 800; line-height: 1; color: var(--ink);
+}
+.stat-val.g { color: var(--green-d); }
+.stat-val.y { color: var(--yellow); }
+.stat-val.r { color: var(--red); }
+.stat-meta {
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink3);
+}
+.stat-indicator { width: 28px; height: 3px; border-radius: 2px; margin-top: 4px; }
+.stat-indicator.g { background: var(--green); }
+.stat-indicator.y { background: var(--yellow); }
+.stat-indicator.r { background: var(--red); }
+.stat-indicator.b { background: var(--blue); }
+
+/* TOOLBAR */
+.toolbar {
+  padding: 16px 40px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  background: var(--white); border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.search-box {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg); border: 1.5px solid var(--line2);
+  border-radius: 6px; padding: 8px 14px;
+  flex: 1; min-width: 180px; max-width: 300px;
+  transition: border-color 0.15s;
+}
+.search-box:focus-within { border-color: var(--green); }
+.search-box svg { width:16px;height:16px;stroke:var(--ink3);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0 }
+.search-box input {
+  border: none; background: transparent;
+  font-family: 'Barlow', sans-serif; font-size: 15px;
+  color: var(--ink); outline: none; width: 100%;
+}
+.search-box input::placeholder { color: var(--ink3); }
+.count-pill {
+  background: var(--bg); border: 1px solid var(--line2);
+  border-radius: 20px; padding: 5px 14px;
+  font-size: 13px; font-weight: 600; color: var(--ink2); white-space: nowrap;
+}
+.legend-row { margin-left: auto; display: flex; gap: 16px; align-items: center; }
+.leg { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink3); font-weight: 500; }
+.leg-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* CONTENT */
+.content { max-width: 1300px; margin: 24px auto; padding: 0 40px; }
+
+.section-divider {
+  display: flex; align-items: center; gap: 14px; margin: 28px 0 0;
+}
+.section-divider:first-child { margin-top: 0; }
+.divider-badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #fff;
+  background: var(--ink); padding: 4px 14px;
+  border-radius: 3px; white-space: nowrap;
+}
+.divider-badge.q22 { background: #8A1F6E; }
+.divider-badge.r18 { background: #1A4FBA; }
+.divider-badge.b14 { background: #007A3D; }
+.divider-badge.u26 { background: #B8520A; }
+.divider-line { flex: 1; height: 1.5px; background: var(--line); }
+
+/* 2026 upcoming styles */
+.upcoming-note {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #FFF8F0; border: 1px solid #F5A623;
+  border-radius: 3px; padding: 3px 9px;
+  font-size: 11px; font-weight: 600; color: #7A5000;
+  text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+}
+.upcoming-note::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%;
+  background: #F5A623; flex-shrink: 0;
+}
+tr.upcoming td { background: #FFFCF5; }
+tr.upcoming:hover td { background: #FFF6E0; }
+.venue-cell { font-size: 12px; color: var(--ink3); font-style: italic; }
+
+/* TABLE */
+.table-card {
+  background: var(--white); border: 1px solid var(--line);
+  border-radius: 8px; overflow: hidden;
+  margin-top: 10px; margin-bottom: 8px;
+}
+table { width: 100%; border-collapse: collapse; }
+thead tr { background: var(--ink); }
+th {
+  padding: 11px 16px; text-align: left;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.7); white-space: nowrap;
+}
+th.center { text-align: center; }
+td {
+  padding: 11px 16px; border-bottom: 1px solid var(--line);
+  font-size: 15px; vertical-align: middle;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #F0F9F4; }
+
+.td-date { font-size: 13px; color: var(--ink3); font-weight: 500; white-space: nowrap; width: 108px; }
+.td-country { font-weight: 600; color: var(--ink); font-size: 15px; }
+.td-rival { color: var(--ink2); font-size: 15px; }
+.td-score { text-align: center; width: 110px; }
+.score-main {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 700; color: var(--ink);
+  line-height: 1; letter-spacing: 0.02em;
+}
+.score-note { font-size: 11px; color: var(--ink3); font-weight: 500; margin-top: 2px; line-height: 1.2; }
+.td-phase { width: 110px; }
+.phase-tag {
+  display: inline-block; background: var(--bg);
+  border: 1px solid var(--line2); border-radius: 3px;
+  padding: 3px 9px; font-size: 12px; font-weight: 600;
+  color: var(--ink3); text-transform: uppercase;
+  letter-spacing: 0.06em; white-space: nowrap;
+}
+.phase-tag.final-tag   { background: #FFF6E0; border-color: #F5A623; color: #7A5000; }
+.phase-tag.semi-tag    { background: #EEF2FF; border-color: #7B8DE0; color: #2A3D9A; }
+.phase-tag.quarters-tag{ background: #F0ECFF; border-color: #A08AE0; color: #4A2A9A; }
+.phase-tag.r16-tag     { background: #E8F7EE; border-color: #7ACBA0; color: #005A30; }
+.phase-tag.third-tag   { background: #FDE8EA; border-color: #E89AA0; color: #8A1020; }
+
+.td-result { width: 104px; }
+.result-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 12px; border-radius: 4px;
+  font-size: 13px; font-weight: 600; white-space: nowrap;
+}
+.result-tag::before {
+  content: ''; width: 8px; height: 8px;
+  border-radius: 50%; flex-shrink: 0;
+}
+.res-win  { background: var(--win-bg);  color: var(--green-d); }
+.res-win::before  { background: var(--green); }
+.res-draw { background: var(--draw-bg); color: #7A5000; }
+.res-draw::before { background: var(--yellow); }
+.res-loss { background: var(--loss-bg); color: #8A1020; }
+.res-loss::before { background: var(--red); }
+
+.empty-row td { text-align: center; padding: 48px 20px; color: var(--ink3); font-size: 15px; }
+.empty-icon {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 40px; font-weight: 800; color: var(--line2);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;
+}
+
+footer {
+  background: var(--ink); border-top: 3px solid var(--green);
+  padding: 20px 40px; text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.4); text-transform: uppercase; margin-top: 40px;
+}
+
+/* API status badge */
+.api-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 3px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; transition: all 0.3s;
+}
+.api-badge.loading { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); }
+.api-badge.live    { background: rgba(0,166,81,0.2);     color: #4CD98A; }
+.api-badge.offline { background: rgba(232,33,46,0.2);    color: #FF8080; }
+.api-badge.soon    { background: rgba(245,166,35,0.2);   color: #F5C842; }
+.api-dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+}
+.api-badge.loading .api-dot { background: rgba(255,255,255,0.3); }
+.api-badge.live    .api-dot { background: #4CD98A; animation: pulse 1.5s infinite; }
+.api-badge.offline .api-dot { background: #FF8080; }
+.api-badge.soon    .api-dot { background: #F5C842; }
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.4; transform:scale(0.7); }
+}
+
+@media(max-width:700px){
+  .header-main,.toolbar,.content { padding-left:16px; padding-right:16px; }
+  .header-top { padding-left:16px; padding-right:16px; }
+  .editions-strip { display:none; }
+  .legend-row { display:none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <span class="badge-pill" data-key="archive">Official Archive</span>
+    <span class="edition-pill">2014 · 2018 · 2022 · 2026</span>
+    <span class="api-badge loading" id="api-badge">
+      <span class="api-dot"></span>
+      <span id="api-badge-text">Connecting…</span>
+    </span>
+    <div class="lang-toggle">
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <div class="lang-sep"></div>
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+  <div class="header-main">
+    <div class="wc-icon">⚽</div>
+    <div class="header-text">
+      <h1>FIFA <span>World Cup</span></h1>
+      <p data-key="subtitle">Complete match record · Each game appears twice, once per team</p>
+    </div>
+    <div class="editions-strip">
+      <div class="ed-chip active" data-cup="all" onclick="setCup(this,'all')">
+        <div class="ed-year" data-key="all">All</div>
+        <div class="ed-host" data-key="editions">4 editions</div>
+      </div>
+      <div class="ed-chip" data-cup="2026" onclick="setCup(this,'2026')">
+        <div class="ed-year">2026</div>
+        <div class="ed-host">USA/CAN/MEX</div>
+      </div>
+      <div class="ed-chip" data-cup="2022" onclick="setCup(this,'2022')">
+        <div class="ed-year">2022</div>
+        <div class="ed-host">Qatar</div>
+      </div>
+      <div class="ed-chip" data-cup="2018" onclick="setCup(this,'2018')">
+        <div class="ed-year">2018</div>
+        <div class="ed-host">Russia</div>
+      </div>
+      <div class="ed-chip" data-cup="2014" onclick="setCup(this,'2014')">
+        <div class="ed-year">2014</div>
+        <div class="ed-host">Brazil</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="stats-bar" id="stats-bar"></div>
+
+<div class="toolbar">
+  <div class="search-box">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search" placeholder="Search team…" oninput="render()">
+  </div>
+  <span class="count-pill" id="count-pill">— records</span>
+  <div class="legend-row">
+    <div class="leg"><div class="leg-dot" style="background:var(--green)"></div> <span data-key="win">Win</span></div>
+    <div class="leg"><div class="leg-dot" style="background:var(--yellow)"></div> <span data-key="draw">Draw</span></div>
+    <div class="leg"><div class="leg-dot" style="background:var(--red)"></div> <span data-key="loss">Loss</span></div>
+  </div>
+</div>
+
+<div class="content" id="content"></div>
+
+<footer>FIFA World Cup · Historical Results · 2014 · 2018 · 2022 · 2026</footer>
+
+<script>
+// ── TRANSLATIONS ──────────────────────────────────────────────
+const T = {
+  en: {
+    archive: 'Official Archive', subtitle: 'Complete match record · Each game appears twice, once per team',
+    all: 'All', editions: '4 editions',
+    searchPlaceholder: 'Search team…',
+    records: 'records', teams: 'Teams', wins: 'Wins', draws: 'Draws', losses: 'Losses',
+    win: 'Win', draw: 'Draw', loss: 'Loss',
+    noResults: 'No results found for that team name.',
+    footer: 'FIFA World Cup · Historical Results · 2014 · 2018 · 2022 · 2026',
+    thDate: 'Date', thTeam: 'Team', thOpponent: 'Opponent', thScore: 'Score', thStage: 'Stage', thResult: 'Result',
+    cupLabel: {'2026':'USA/CAN/MEX 2026','2022':'Qatar 2022','2018':'Russia 2018','2014':'Brazil 2014'},
+    hosts: {'2026':'USA/CAN/MEX','2022':'Qatar','2018':'Russia','2014':'Brazil'},
+    phases: {
+      'Grupo A':'Group A','Grupo B':'Group B','Grupo C':'Group C','Grupo D':'Group D',
+      'Grupo E':'Group E','Grupo F':'Group F','Grupo G':'Group G','Grupo H':'Group H',
+      'Grupo I':'Group I','Grupo J':'Group J','Grupo K':'Group K','Grupo L':'Group L',
+      'Octavos':'Round of 16','Cuartos':'Quarter-finals',
+      'Semifinal':'Semi-finals','3er lugar':'3rd place','Final':'Final'
+    },
+    teams: {
+      '🇶🇦 Qatar':'🇶🇦 Qatar','🇪🇨 Ecuador':'🇪🇨 Ecuador','🇸🇳 Senegal':'🇸🇳 Senegal',
+      '🇳🇱 Países Bajos':'🇳🇱 Netherlands','🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra':'🏴󠁧󠁢󠁥󠁮󠁧󠁿 England',
+      '🇮🇷 Irán':'🇮🇷 Iran','🇺🇸 EE.UU.':'🇺🇸 USA','🏴󠁧󠁢󠁷󠁬󠁳󠁿 Gales':'🏴󠁧󠁢󠁷󠁬󠁳󠁿 Wales',
+      '🇦🇷 Argentina':'🇦🇷 Argentina','🇸🇦 Arabia Saudita':'🇸🇦 Saudi Arabia',
+      '🇲🇽 México':'🇲🇽 Mexico','🇵🇱 Polonia':'🇵🇱 Poland',
+      '🇩🇰 Dinamarca':'🇩🇰 Denmark','🇹🇳 Túnez':'🇹🇳 Tunisia',
+      '🇫🇷 Francia':'🇫🇷 France','🇦🇺 Australia':'🇦🇺 Australia',
+      '🇩🇪 Alemania':'🇩🇪 Germany','🇯🇵 Japón':'🇯🇵 Japan',
+      '🇪🇸 España':'🇪🇸 Spain','🇨🇷 Costa Rica':'🇨🇷 Costa Rica',
+      '🇧🇪 Bélgica':'🇧🇪 Belgium','🇨🇦 Canadá':'🇨🇦 Canada',
+      '🇲🇦 Marruecos':'🇲🇦 Morocco','🇭🇷 Croacia':'🇭🇷 Croatia',
+      '🇧🇷 Brasil':'🇧🇷 Brazil','🇷🇸 Serbia':'🇷🇸 Serbia',
+      '🇨🇭 Suiza':'🇨🇭 Switzerland','🇨🇲 Camerún':'🇨🇲 Cameroon',
+      '🇵🇹 Portugal':'🇵🇹 Portugal','🇬🇭 Ghana':'🇬🇭 Ghana',
+      '🇺🇾 Uruguay':'🇺🇾 Uruguay','🇰🇷 Corea del Sur':'🇰🇷 South Korea',
+      '🇷🇺 Rusia':'🇷🇺 Russia','🇸🇦 Arabia Saudita':'🇸🇦 Saudi Arabia',
+      '🇪🇬 Egipto':'🇪🇬 Egypt','🇮🇸 Islandia':'🇮🇸 Iceland',
+      '🇳🇬 Nigeria':'🇳🇬 Nigeria','🇵🇪 Perú':'🇵🇪 Peru',
+      '🇨🇴 Colombia':'🇨🇴 Colombia','🇸🇪 Suecia':'🇸🇪 Sweden',
+      '🇵🇦 Panamá':'🇵🇦 Panama','🇯🇵 Japón':'🇯🇵 Japan',
+      '🇨🇱 Chile':'🇨🇱 Chile','🇬🇷 Grecia':'🇬🇷 Greece',
+      '🇮🇹 Italia':'🇮🇹 Italy','🇧🇦 Bosnia':'🇧🇦 Bosnia',
+      '🇩🇿 Argelia':'🇩🇿 Algeria','🇭🇳 Honduras':'🇭🇳 Honduras',
+      '🇪🇨 Ecuador':'🇪🇨 Ecuador','🇨🇮 Costa de Marfil':'🇨🇮 Ivory Coast',
+      '🇮🇷 Irán':'🇮🇷 Iran',
+      '🇧🇸 Bahamas':'🇧🇸 Bahamas','🇸🇻 El Salvador':'🇸🇻 El Salvador',
+      '🇳🇿 Nueva Zelanda':'🇳🇿 New Zealand','🇰🇿 Kazajistán':'🇰🇿 Kazakhstan',
+      '🇲🇩 Moldova':'🇲🇩 Moldova','🇿🇼 Zimbabue':'🇿🇼 Zimbabwe',
+      '🇨🇿 República Checa':'🇨🇿 Czech Republic','🇬🇦 Gabón':'🇬🇦 Gabon',
+      '🇸🇰 Eslovaquia':'🇸🇰 Slovakia','🇹🇿 Tanzania':'🇹🇿 Tanzania',
+      '🇮🇩 Indonesia':'🇮🇩 Indonesia','🇹🇭 Tailandia':'🇹🇭 Thailand',
+      '🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia':'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland','🇲🇼 Malaui':'🇲🇼 Malawi',
+    }
+  },
+  es: {
+    archive: 'Archivo Oficial', subtitle: 'Registro completo de partidos · Cada encuentro aparece dos veces, una por cada selección',
+    all: 'Todas', editions: '4 ediciones',
+    searchPlaceholder: 'Buscar selección…',
+    records: 'registros', teams: 'Selecciones', wins: 'Victorias', draws: 'Empates', losses: 'Derrotas',
+    win: 'Victoria', draw: 'Empate', loss: 'Derrota',
+    noResults: 'No se encontró ninguna selección con ese nombre.',
+    footer: 'FIFA World Cup · Resultados Históricos · 2014 · 2018 · 2022 · 2026',
+    thDate: 'Fecha', thTeam: 'Selección', thOpponent: 'Rival', thScore: 'Marcador', thStage: 'Fase', thResult: 'Resultado',
+    cupLabel: {'2026':'USA/CAN/MEX 2026','2022':'Qatar 2022','2018':'Rusia 2018','2014':'Brasil 2014'},
+    hosts: {'2026':'USA/CAN/MEX','2022':'Qatar','2018':'Rusia','2014':'Brasil'},
+    phases: {
+      'Grupo A':'Grupo A','Grupo B':'Grupo B','Grupo C':'Grupo C','Grupo D':'Grupo D',
+      'Grupo E':'Grupo E','Grupo F':'Grupo F','Grupo G':'Grupo G','Grupo H':'Grupo H',
+      'Grupo I':'Grupo I','Grupo J':'Grupo J','Grupo K':'Grupo K','Grupo L':'Grupo L',
+      'Octavos':'Octavos','Cuartos':'Cuartos',
+      'Semifinal':'Semifinal','3er lugar':'3er lugar','Final':'Final'
+    },
+    teams: {} // identity mapping for Spanish
+  }
+};
+
+// ── RAW DATA (Spanish team names as canonical) ───────────────
+const raw = [
+  {cup:'2022',date:'21 Nov 2022',t1:'🇶🇦 Qatar',t2:'🇪🇨 Ecuador',g1:0,g2:2,phase:'Grupo A'},
+  {cup:'2022',date:'25 Nov 2022',t1:'🇶🇦 Qatar',t2:'🇸🇳 Senegal',g1:1,g2:3,phase:'Grupo A'},
+  {cup:'2022',date:'25 Nov 2022',t1:'🇳🇱 Países Bajos',t2:'🇪🇨 Ecuador',g1:1,g2:1,phase:'Grupo A'},
+  {cup:'2022',date:'29 Nov 2022',t1:'🇪🇨 Ecuador',t2:'🇸🇳 Senegal',g1:1,g2:2,phase:'Grupo A'},
+  {cup:'2022',date:'29 Nov 2022',t1:'🇳🇱 Países Bajos',t2:'🇶🇦 Qatar',g1:2,g2:0,phase:'Grupo A'},
+  {cup:'2022',date:'21 Nov 2022',t1:'🇳🇱 Países Bajos',t2:'🇸🇳 Senegal',g1:2,g2:0,phase:'Grupo A'},
+  {cup:'2022',date:'21 Nov 2022',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇮🇷 Irán',g1:6,g2:2,phase:'Grupo B'},
+  {cup:'2022',date:'21 Nov 2022',t1:'🇺🇸 EE.UU.',t2:'🏴󠁧󠁢󠁷󠁬󠁳󠁿 Gales',g1:1,g2:1,phase:'Grupo B'},
+  {cup:'2022',date:'25 Nov 2022',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇺🇸 EE.UU.',g1:0,g2:0,phase:'Grupo B'},
+  {cup:'2022',date:'25 Nov 2022',t1:'🏴󠁧󠁢󠁷󠁬󠁳󠁿 Gales',t2:'🇮🇷 Irán',g1:0,g2:2,phase:'Grupo B'},
+  {cup:'2022',date:'29 Nov 2022',t1:'🏴󠁧󠁢󠁷󠁬󠁳󠁿 Gales',t2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',g1:0,g2:3,phase:'Grupo B'},
+  {cup:'2022',date:'29 Nov 2022',t1:'🇮🇷 Irán',t2:'🇺🇸 EE.UU.',g1:0,g2:1,phase:'Grupo B'},
+  {cup:'2022',date:'22 Nov 2022',t1:'🇦🇷 Argentina',t2:'🇸🇦 Arabia Saudita',g1:1,g2:2,phase:'Grupo C'},
+  {cup:'2022',date:'22 Nov 2022',t1:'🇲🇽 México',t2:'🇵🇱 Polonia',g1:0,g2:0,phase:'Grupo C'},
+  {cup:'2022',date:'26 Nov 2022',t1:'🇵🇱 Polonia',t2:'🇸🇦 Arabia Saudita',g1:2,g2:0,phase:'Grupo C'},
+  {cup:'2022',date:'26 Nov 2022',t1:'🇦🇷 Argentina',t2:'🇲🇽 México',g1:2,g2:0,phase:'Grupo C'},
+  {cup:'2022',date:'30 Nov 2022',t1:'🇵🇱 Polonia',t2:'🇦🇷 Argentina',g1:0,g2:2,phase:'Grupo C'},
+  {cup:'2022',date:'30 Nov 2022',t1:'🇸🇦 Arabia Saudita',t2:'🇲🇽 México',g1:1,g2:2,phase:'Grupo C'},
+  {cup:'2022',date:'22 Nov 2022',t1:'🇩🇰 Dinamarca',t2:'🇹🇳 Túnez',g1:0,g2:0,phase:'Grupo D'},
+  {cup:'2022',date:'22 Nov 2022',t1:'🇫🇷 Francia',t2:'🇦🇺 Australia',g1:4,g2:1,phase:'Grupo D'},
+  {cup:'2022',date:'26 Nov 2022',t1:'🇫🇷 Francia',t2:'🇩🇰 Dinamarca',g1:2,g2:1,phase:'Grupo D'},
+  {cup:'2022',date:'26 Nov 2022',t1:'🇹🇳 Túnez',t2:'🇦🇺 Australia',g1:0,g2:1,phase:'Grupo D'},
+  {cup:'2022',date:'30 Nov 2022',t1:'🇹🇳 Túnez',t2:'🇫🇷 Francia',g1:1,g2:0,phase:'Grupo D'},
+  {cup:'2022',date:'30 Nov 2022',t1:'🇦🇺 Australia',t2:'🇩🇰 Dinamarca',g1:1,g2:0,phase:'Grupo D'},
+  {cup:'2022',date:'23 Nov 2022',t1:'🇩🇪 Alemania',t2:'🇯🇵 Japón',g1:1,g2:2,phase:'Grupo E'},
+  {cup:'2022',date:'23 Nov 2022',t1:'🇪🇸 España',t2:'🇨🇷 Costa Rica',g1:7,g2:0,phase:'Grupo E'},
+  {cup:'2022',date:'27 Nov 2022',t1:'🇯🇵 Japón',t2:'🇨🇷 Costa Rica',g1:0,g2:1,phase:'Grupo E'},
+  {cup:'2022',date:'27 Nov 2022',t1:'🇪🇸 España',t2:'🇩🇪 Alemania',g1:1,g2:1,phase:'Grupo E'},
+  {cup:'2022',date:'1 Dec 2022',t1:'🇯🇵 Japón',t2:'🇪🇸 España',g1:2,g2:1,phase:'Grupo E'},
+  {cup:'2022',date:'1 Dec 2022',t1:'🇨🇷 Costa Rica',t2:'🇩🇪 Alemania',g1:2,g2:4,phase:'Grupo E'},
+  {cup:'2022',date:'23 Nov 2022',t1:'🇧🇪 Bélgica',t2:'🇨🇦 Canadá',g1:1,g2:0,phase:'Grupo F'},
+  {cup:'2022',date:'23 Nov 2022',t1:'🇲🇦 Marruecos',t2:'🇭🇷 Croacia',g1:0,g2:0,phase:'Grupo F'},
+  {cup:'2022',date:'27 Nov 2022',t1:'🇧🇪 Bélgica',t2:'🇲🇦 Marruecos',g1:0,g2:2,phase:'Grupo F'},
+  {cup:'2022',date:'27 Nov 2022',t1:'🇭🇷 Croacia',t2:'🇨🇦 Canadá',g1:4,g2:1,phase:'Grupo F'},
+  {cup:'2022',date:'1 Dec 2022',t1:'🇭🇷 Croacia',t2:'🇧🇪 Bélgica',g1:0,g2:0,phase:'Grupo F'},
+  {cup:'2022',date:'1 Dec 2022',t1:'🇨🇦 Canadá',t2:'🇲🇦 Marruecos',g1:1,g2:2,phase:'Grupo F'},
+  {cup:'2022',date:'24 Nov 2022',t1:'🇧🇷 Brasil',t2:'🇷🇸 Serbia',g1:2,g2:0,phase:'Grupo G'},
+  {cup:'2022',date:'24 Nov 2022',t1:'🇨🇭 Suiza',t2:'🇨🇲 Camerún',g1:1,g2:0,phase:'Grupo G'},
+  {cup:'2022',date:'28 Nov 2022',t1:'🇧🇷 Brasil',t2:'🇨🇭 Suiza',g1:1,g2:0,phase:'Grupo G'},
+  {cup:'2022',date:'28 Nov 2022',t1:'🇨🇲 Camerún',t2:'🇷🇸 Serbia',g1:3,g2:3,phase:'Grupo G'},
+  {cup:'2022',date:'2 Dec 2022',t1:'🇧🇷 Brasil',t2:'🇨🇲 Camerún',g1:0,g2:1,phase:'Grupo G'},
+  {cup:'2022',date:'2 Dec 2022',t1:'🇷🇸 Serbia',t2:'🇨🇭 Suiza',g1:2,g2:3,phase:'Grupo G'},
+  {cup:'2022',date:'24 Nov 2022',t1:'🇵🇹 Portugal',t2:'🇬🇭 Ghana',g1:3,g2:2,phase:'Grupo H'},
+  {cup:'2022',date:'24 Nov 2022',t1:'🇺🇾 Uruguay',t2:'🇰🇷 Corea del Sur',g1:0,g2:0,phase:'Grupo H'},
+  {cup:'2022',date:'28 Nov 2022',t1:'🇵🇹 Portugal',t2:'🇺🇾 Uruguay',g1:2,g2:0,phase:'Grupo H'},
+  {cup:'2022',date:'28 Nov 2022',t1:'🇰🇷 Corea del Sur',t2:'🇬🇭 Ghana',g1:2,g2:3,phase:'Grupo H'},
+  {cup:'2022',date:'2 Dec 2022',t1:'🇰🇷 Corea del Sur',t2:'🇵🇹 Portugal',g1:2,g2:1,phase:'Grupo H'},
+  {cup:'2022',date:'2 Dec 2022',t1:'🇬🇭 Ghana',t2:'🇺🇾 Uruguay',g1:0,g2:2,phase:'Grupo H'},
+  {cup:'2022',date:'3 Dec 2022',t1:'🇳🇱 Países Bajos',t2:'🇺🇸 EE.UU.',g1:3,g2:1,phase:'Octavos'},
+  {cup:'2022',date:'3 Dec 2022',t1:'🇦🇷 Argentina',t2:'🇦🇺 Australia',g1:2,g2:1,phase:'Octavos'},
+  {cup:'2022',date:'4 Dec 2022',t1:'🇫🇷 Francia',t2:'🇵🇱 Polonia',g1:3,g2:1,phase:'Octavos'},
+  {cup:'2022',date:'4 Dec 2022',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇸🇳 Senegal',g1:3,g2:0,phase:'Octavos'},
+  {cup:'2022',date:'5 Dec 2022',t1:'🇧🇷 Brasil',t2:'🇰🇷 Corea del Sur',g1:4,g2:1,phase:'Octavos'},
+  {cup:'2022',date:'5 Dec 2022',t1:'🇯🇵 Japón',t2:'🇭🇷 Croacia',g1:1,g2:1,phase:'Octavos',note_es:'pen. Croacia 3–1',note_en:'pens. Croatia 3–1'},
+  {cup:'2022',date:'6 Dec 2022',t1:'🇲🇦 Marruecos',t2:'🇪🇸 España',g1:0,g2:0,phase:'Octavos',note_es:'pen. Marruecos 3–0',note_en:'pens. Morocco 3–0'},
+  {cup:'2022',date:'6 Dec 2022',t1:'🇵🇹 Portugal',t2:'🇨🇭 Suiza',g1:6,g2:1,phase:'Octavos'},
+  {cup:'2022',date:'9 Dec 2022',t1:'🇭🇷 Croacia',t2:'🇧🇷 Brasil',g1:1,g2:1,phase:'Cuartos',note_es:'pen. Croacia 4–2',note_en:'pens. Croatia 4–2'},
+  {cup:'2022',date:'9 Dec 2022',t1:'🇳🇱 Países Bajos',t2:'🇦🇷 Argentina',g1:2,g2:2,phase:'Cuartos',note_es:'pen. Argentina 4–3',note_en:'pens. Argentina 4–3'},
+  {cup:'2022',date:'10 Dec 2022',t1:'🇲🇦 Marruecos',t2:'🇵🇹 Portugal',g1:1,g2:0,phase:'Cuartos'},
+  {cup:'2022',date:'10 Dec 2022',t1:'🇫🇷 Francia',t2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',g1:2,g2:1,phase:'Cuartos'},
+  {cup:'2022',date:'13 Dec 2022',t1:'🇦🇷 Argentina',t2:'🇭🇷 Croacia',g1:3,g2:0,phase:'Semifinal'},
+  {cup:'2022',date:'14 Dec 2022',t1:'🇫🇷 Francia',t2:'🇲🇦 Marruecos',g1:2,g2:0,phase:'Semifinal'},
+  {cup:'2022',date:'17 Dec 2022',t1:'🇭🇷 Croacia',t2:'🇲🇦 Marruecos',g1:2,g2:1,phase:'3er lugar'},
+  {cup:'2022',date:'18 Dec 2022',t1:'🇦🇷 Argentina',t2:'🇫🇷 Francia',g1:3,g2:3,phase:'Final',note_es:'pen. Argentina 4–2',note_en:'pens. Argentina 4–2'},
+  {cup:'2018',date:'14 Jun 2018',t1:'🇷🇺 Rusia',t2:'🇸🇦 Arabia Saudita',g1:5,g2:0,phase:'Grupo A'},
+  {cup:'2018',date:'15 Jun 2018',t1:'🇺🇾 Uruguay',t2:'🇪🇬 Egipto',g1:1,g2:0,phase:'Grupo A'},
+  {cup:'2018',date:'19 Jun 2018',t1:'🇷🇺 Rusia',t2:'🇪🇬 Egipto',g1:3,g2:0,phase:'Grupo A'},
+  {cup:'2018',date:'20 Jun 2018',t1:'🇺🇾 Uruguay',t2:'🇸🇦 Arabia Saudita',g1:1,g2:0,phase:'Grupo A'},
+  {cup:'2018',date:'25 Jun 2018',t1:'🇺🇾 Uruguay',t2:'🇷🇺 Rusia',g1:3,g2:0,phase:'Grupo A'},
+  {cup:'2018',date:'25 Jun 2018',t1:'🇸🇦 Arabia Saudita',t2:'🇪🇬 Egipto',g1:2,g2:1,phase:'Grupo A'},
+  {cup:'2018',date:'15 Jun 2018',t1:'🇵🇹 Portugal',t2:'🇪🇸 España',g1:3,g2:3,phase:'Grupo B'},
+  {cup:'2018',date:'15 Jun 2018',t1:'🇮🇷 Irán',t2:'🇲🇦 Marruecos',g1:1,g2:0,phase:'Grupo B'},
+  {cup:'2018',date:'20 Jun 2018',t1:'🇵🇹 Portugal',t2:'🇲🇦 Marruecos',g1:1,g2:0,phase:'Grupo B'},
+  {cup:'2018',date:'20 Jun 2018',t1:'🇮🇷 Irán',t2:'🇪🇸 España',g1:0,g2:1,phase:'Grupo B'},
+  {cup:'2018',date:'25 Jun 2018',t1:'🇵🇹 Portugal',t2:'🇮🇷 Irán',g1:1,g2:1,phase:'Grupo B'},
+  {cup:'2018',date:'25 Jun 2018',t1:'🇪🇸 España',t2:'🇲🇦 Marruecos',g1:2,g2:2,phase:'Grupo B'},
+  {cup:'2018',date:'16 Jun 2018',t1:'🇫🇷 Francia',t2:'🇦🇺 Australia',g1:2,g2:1,phase:'Grupo C'},
+  {cup:'2018',date:'16 Jun 2018',t1:'🇵🇪 Perú',t2:'🇩🇰 Dinamarca',g1:0,g2:1,phase:'Grupo C'},
+  {cup:'2018',date:'21 Jun 2018',t1:'🇫🇷 Francia',t2:'🇵🇪 Perú',g1:1,g2:0,phase:'Grupo C'},
+  {cup:'2018',date:'21 Jun 2018',t1:'🇩🇰 Dinamarca',t2:'🇦🇺 Australia',g1:1,g2:1,phase:'Grupo C'},
+  {cup:'2018',date:'26 Jun 2018',t1:'🇫🇷 Francia',t2:'🇩🇰 Dinamarca',g1:0,g2:0,phase:'Grupo C'},
+  {cup:'2018',date:'26 Jun 2018',t1:'🇦🇺 Australia',t2:'🇵🇪 Perú',g1:0,g2:2,phase:'Grupo C'},
+  {cup:'2018',date:'16 Jun 2018',t1:'🇦🇷 Argentina',t2:'🇮🇸 Islandia',g1:1,g2:1,phase:'Grupo D'},
+  {cup:'2018',date:'16 Jun 2018',t1:'🇭🇷 Croacia',t2:'🇳🇬 Nigeria',g1:2,g2:0,phase:'Grupo D'},
+  {cup:'2018',date:'21 Jun 2018',t1:'🇦🇷 Argentina',t2:'🇭🇷 Croacia',g1:0,g2:3,phase:'Grupo D'},
+  {cup:'2018',date:'22 Jun 2018',t1:'🇳🇬 Nigeria',t2:'🇮🇸 Islandia',g1:2,g2:0,phase:'Grupo D'},
+  {cup:'2018',date:'26 Jun 2018',t1:'🇦🇷 Argentina',t2:'🇳🇬 Nigeria',g1:2,g2:1,phase:'Grupo D'},
+  {cup:'2018',date:'26 Jun 2018',t1:'🇮🇸 Islandia',t2:'🇭🇷 Croacia',g1:1,g2:2,phase:'Grupo D'},
+  {cup:'2018',date:'17 Jun 2018',t1:'🇧🇷 Brasil',t2:'🇨🇭 Suiza',g1:1,g2:1,phase:'Grupo E'},
+  {cup:'2018',date:'17 Jun 2018',t1:'🇨🇷 Costa Rica',t2:'🇷🇸 Serbia',g1:0,g2:1,phase:'Grupo E'},
+  {cup:'2018',date:'22 Jun 2018',t1:'🇧🇷 Brasil',t2:'🇨🇷 Costa Rica',g1:2,g2:0,phase:'Grupo E'},
+  {cup:'2018',date:'22 Jun 2018',t1:'🇷🇸 Serbia',t2:'🇨🇭 Suiza',g1:1,g2:2,phase:'Grupo E'},
+  {cup:'2018',date:'27 Jun 2018',t1:'🇧🇷 Brasil',t2:'🇷🇸 Serbia',g1:2,g2:0,phase:'Grupo E'},
+  {cup:'2018',date:'27 Jun 2018',t1:'🇨🇭 Suiza',t2:'🇨🇷 Costa Rica',g1:2,g2:2,phase:'Grupo E'},
+  {cup:'2018',date:'17 Jun 2018',t1:'🇩🇪 Alemania',t2:'🇲🇽 México',g1:0,g2:1,phase:'Grupo F'},
+  {cup:'2018',date:'18 Jun 2018',t1:'🇸🇪 Suecia',t2:'🇰🇷 Corea del Sur',g1:1,g2:0,phase:'Grupo F'},
+  {cup:'2018',date:'23 Jun 2018',t1:'🇩🇪 Alemania',t2:'🇸🇪 Suecia',g1:2,g2:1,phase:'Grupo F'},
+  {cup:'2018',date:'23 Jun 2018',t1:'🇲🇽 México',t2:'🇰🇷 Corea del Sur',g1:2,g2:1,phase:'Grupo F'},
+  {cup:'2018',date:'27 Jun 2018',t1:'🇩🇪 Alemania',t2:'🇰🇷 Corea del Sur',g1:0,g2:2,phase:'Grupo F'},
+  {cup:'2018',date:'27 Jun 2018',t1:'🇲🇽 México',t2:'🇸🇪 Suecia',g1:0,g2:3,phase:'Grupo F'},
+  {cup:'2018',date:'18 Jun 2018',t1:'🇧🇪 Bélgica',t2:'🇵🇦 Panamá',g1:3,g2:0,phase:'Grupo G'},
+  {cup:'2018',date:'18 Jun 2018',t1:'🇹🇳 Túnez',t2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',g1:1,g2:2,phase:'Grupo G'},
+  {cup:'2018',date:'23 Jun 2018',t1:'🇧🇪 Bélgica',t2:'🇹🇳 Túnez',g1:5,g2:2,phase:'Grupo G'},
+  {cup:'2018',date:'24 Jun 2018',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇵🇦 Panamá',g1:6,g2:1,phase:'Grupo G'},
+  {cup:'2018',date:'28 Jun 2018',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇧🇪 Bélgica',g1:0,g2:1,phase:'Grupo G'},
+  {cup:'2018',date:'28 Jun 2018',t1:'🇵🇦 Panamá',t2:'🇹🇳 Túnez',g1:1,g2:2,phase:'Grupo G'},
+  {cup:'2018',date:'19 Jun 2018',t1:'🇵🇱 Polonia',t2:'🇸🇳 Senegal',g1:1,g2:2,phase:'Grupo H'},
+  {cup:'2018',date:'19 Jun 2018',t1:'🇯🇵 Japón',t2:'🇨🇴 Colombia',g1:2,g2:1,phase:'Grupo H'},
+  {cup:'2018',date:'24 Jun 2018',t1:'🇯🇵 Japón',t2:'🇸🇳 Senegal',g1:2,g2:2,phase:'Grupo H'},
+  {cup:'2018',date:'24 Jun 2018',t1:'🇵🇱 Polonia',t2:'🇨🇴 Colombia',g1:0,g2:3,phase:'Grupo H'},
+  {cup:'2018',date:'28 Jun 2018',t1:'🇯🇵 Japón',t2:'🇵🇱 Polonia',g1:0,g2:1,phase:'Grupo H'},
+  {cup:'2018',date:'28 Jun 2018',t1:'🇸🇳 Senegal',t2:'🇨🇴 Colombia',g1:0,g2:1,phase:'Grupo H'},
+  {cup:'2018',date:'30 Jun 2018',t1:'🇫🇷 Francia',t2:'🇦🇷 Argentina',g1:4,g2:3,phase:'Octavos'},
+  {cup:'2018',date:'30 Jun 2018',t1:'🇺🇾 Uruguay',t2:'🇵🇹 Portugal',g1:2,g2:1,phase:'Octavos'},
+  {cup:'2018',date:'1 Jul 2018',t1:'🇷🇺 Rusia',t2:'🇪🇸 España',g1:1,g2:1,phase:'Octavos',note_es:'pen. Rusia 4–3',note_en:'pens. Russia 4–3'},
+  {cup:'2018',date:'1 Jul 2018',t1:'🇭🇷 Croacia',t2:'🇩🇰 Dinamarca',g1:1,g2:1,phase:'Octavos',note_es:'pen. Croacia 3–2',note_en:'pens. Croatia 3–2'},
+  {cup:'2018',date:'2 Jul 2018',t1:'🇧🇷 Brasil',t2:'🇲🇽 México',g1:2,g2:0,phase:'Octavos'},
+  {cup:'2018',date:'2 Jul 2018',t1:'🇧🇪 Bélgica',t2:'🇯🇵 Japón',g1:3,g2:2,phase:'Octavos'},
+  {cup:'2018',date:'3 Jul 2018',t1:'🇸🇪 Suecia',t2:'🇨🇭 Suiza',g1:1,g2:0,phase:'Octavos'},
+  {cup:'2018',date:'3 Jul 2018',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇨🇴 Colombia',g1:1,g2:1,phase:'Octavos',note_es:'pen. Inglaterra 4–3',note_en:'pens. England 4–3'},
+  {cup:'2018',date:'6 Jul 2018',t1:'🇺🇾 Uruguay',t2:'🇫🇷 Francia',g1:0,g2:2,phase:'Cuartos'},
+  {cup:'2018',date:'6 Jul 2018',t1:'🇧🇷 Brasil',t2:'🇧🇪 Bélgica',g1:1,g2:2,phase:'Cuartos'},
+  {cup:'2018',date:'7 Jul 2018',t1:'🇷🇺 Rusia',t2:'🇭🇷 Croacia',g1:2,g2:2,phase:'Cuartos',note_es:'pen. Croacia 4–3',note_en:'pens. Croatia 4–3'},
+  {cup:'2018',date:'7 Jul 2018',t1:'🇸🇪 Suecia',t2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',g1:0,g2:2,phase:'Cuartos'},
+  {cup:'2018',date:'10 Jul 2018',t1:'🇫🇷 Francia',t2:'🇧🇪 Bélgica',g1:1,g2:0,phase:'Semifinal'},
+  {cup:'2018',date:'11 Jul 2018',t1:'🇭🇷 Croacia',t2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',g1:2,g2:1,phase:'Semifinal'},
+  {cup:'2018',date:'14 Jul 2018',t1:'🇧🇪 Bélgica',t2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',g1:2,g2:0,phase:'3er lugar'},
+  {cup:'2018',date:'15 Jul 2018',t1:'🇫🇷 Francia',t2:'🇭🇷 Croacia',g1:4,g2:2,phase:'Final'},
+  {cup:'2014',date:'12 Jun 2014',t1:'🇧🇷 Brasil',t2:'🇭🇷 Croacia',g1:3,g2:1,phase:'Grupo A'},
+  {cup:'2014',date:'13 Jun 2014',t1:'🇲🇽 México',t2:'🇨🇲 Camerún',g1:1,g2:0,phase:'Grupo A'},
+  {cup:'2014',date:'17 Jun 2014',t1:'🇧🇷 Brasil',t2:'🇲🇽 México',g1:0,g2:0,phase:'Grupo A'},
+  {cup:'2014',date:'18 Jun 2014',t1:'🇭🇷 Croacia',t2:'🇨🇲 Camerún',g1:4,g2:0,phase:'Grupo A'},
+  {cup:'2014',date:'23 Jun 2014',t1:'🇧🇷 Brasil',t2:'🇨🇲 Camerún',g1:4,g2:1,phase:'Grupo A'},
+  {cup:'2014',date:'23 Jun 2014',t1:'🇲🇽 México',t2:'🇭🇷 Croacia',g1:3,g2:1,phase:'Grupo A'},
+  {cup:'2014',date:'13 Jun 2014',t1:'🇪🇸 España',t2:'🇳🇱 Países Bajos',g1:1,g2:5,phase:'Grupo B'},
+  {cup:'2014',date:'13 Jun 2014',t1:'🇨🇱 Chile',t2:'🇦🇺 Australia',g1:3,g2:1,phase:'Grupo B'},
+  {cup:'2014',date:'18 Jun 2014',t1:'🇪🇸 España',t2:'🇨🇱 Chile',g1:0,g2:2,phase:'Grupo B'},
+  {cup:'2014',date:'18 Jun 2014',t1:'🇳🇱 Países Bajos',t2:'🇦🇺 Australia',g1:3,g2:2,phase:'Grupo B'},
+  {cup:'2014',date:'23 Jun 2014',t1:'🇳🇱 Países Bajos',t2:'🇨🇱 Chile',g1:2,g2:0,phase:'Grupo B'},
+  {cup:'2014',date:'23 Jun 2014',t1:'🇦🇺 Australia',t2:'🇪🇸 España',g1:0,g2:3,phase:'Grupo B'},
+  {cup:'2014',date:'14 Jun 2014',t1:'🇨🇴 Colombia',t2:'🇬🇷 Grecia',g1:3,g2:0,phase:'Grupo C'},
+  {cup:'2014',date:'14 Jun 2014',t1:'🇨🇮 Costa de Marfil',t2:'🇯🇵 Japón',g1:2,g2:1,phase:'Grupo C'},
+  {cup:'2014',date:'19 Jun 2014',t1:'🇨🇴 Colombia',t2:'🇨🇮 Costa de Marfil',g1:2,g2:1,phase:'Grupo C'},
+  {cup:'2014',date:'19 Jun 2014',t1:'🇬🇷 Grecia',t2:'🇯🇵 Japón',g1:0,g2:0,phase:'Grupo C'},
+  {cup:'2014',date:'24 Jun 2014',t1:'🇯🇵 Japón',t2:'🇨🇴 Colombia',g1:1,g2:4,phase:'Grupo C'},
+  {cup:'2014',date:'24 Jun 2014',t1:'🇬🇷 Grecia',t2:'🇨🇮 Costa de Marfil',g1:2,g2:1,phase:'Grupo C'},
+  {cup:'2014',date:'14 Jun 2014',t1:'🇺🇾 Uruguay',t2:'🇨🇷 Costa Rica',g1:1,g2:3,phase:'Grupo D'},
+  {cup:'2014',date:'14 Jun 2014',t1:'🇩🇪 Alemania',t2:'🇵🇹 Portugal',g1:4,g2:0,phase:'Grupo D'},
+  {cup:'2014',date:'19 Jun 2014',t1:'🇺🇾 Uruguay',t2:'🇩🇪 Alemania',g1:1,g2:2,phase:'Grupo D'},
+  {cup:'2014',date:'20 Jun 2014',t1:'🇨🇷 Costa Rica',t2:'🇮🇹 Italia',g1:1,g2:0,phase:'Grupo D'},
+  {cup:'2014',date:'24 Jun 2014',t1:'🇩🇪 Alemania',t2:'🇺🇸 EE.UU.',g1:1,g2:0,phase:'Grupo D'},
+  {cup:'2014',date:'24 Jun 2014',t1:'🇵🇹 Portugal',t2:'🇬🇭 Ghana',g1:2,g2:1,phase:'Grupo D'},
+  {cup:'2014',date:'19 Jun 2014',t1:'🇮🇹 Italia',t2:'🇺🇾 Uruguay',g1:0,g2:1,phase:'Grupo D'},
+  {cup:'2014',date:'15 Jun 2014',t1:'🇨🇭 Suiza',t2:'🇪🇨 Ecuador',g1:2,g2:1,phase:'Grupo E'},
+  {cup:'2014',date:'15 Jun 2014',t1:'🇫🇷 Francia',t2:'🇭🇳 Honduras',g1:3,g2:0,phase:'Grupo E'},
+  {cup:'2014',date:'20 Jun 2014',t1:'🇫🇷 Francia',t2:'🇨🇭 Suiza',g1:5,g2:2,phase:'Grupo E'},
+  {cup:'2014',date:'20 Jun 2014',t1:'🇭🇳 Honduras',t2:'🇪🇨 Ecuador',g1:1,g2:2,phase:'Grupo E'},
+  {cup:'2014',date:'25 Jun 2014',t1:'🇫🇷 Francia',t2:'🇪🇨 Ecuador',g1:0,g2:0,phase:'Grupo E'},
+  {cup:'2014',date:'25 Jun 2014',t1:'🇨🇭 Suiza',t2:'🇭🇳 Honduras',g1:3,g2:0,phase:'Grupo E'},
+  {cup:'2014',date:'15 Jun 2014',t1:'🇦🇷 Argentina',t2:'🇧🇦 Bosnia',g1:2,g2:1,phase:'Grupo F'},
+  {cup:'2014',date:'16 Jun 2014',t1:'🇮🇷 Irán',t2:'🇳🇬 Nigeria',g1:0,g2:0,phase:'Grupo F'},
+  {cup:'2014',date:'21 Jun 2014',t1:'🇦🇷 Argentina',t2:'🇮🇷 Irán',g1:1,g2:0,phase:'Grupo F'},
+  {cup:'2014',date:'21 Jun 2014',t1:'🇳🇬 Nigeria',t2:'🇧🇦 Bosnia',g1:1,g2:0,phase:'Grupo F'},
+  {cup:'2014',date:'25 Jun 2014',t1:'🇦🇷 Argentina',t2:'🇳🇬 Nigeria',g1:3,g2:2,phase:'Grupo F'},
+  {cup:'2014',date:'25 Jun 2014',t1:'🇧🇦 Bosnia',t2:'🇮🇷 Irán',g1:3,g2:1,phase:'Grupo F'},
+  {cup:'2014',date:'16 Jun 2014',t1:'🇩🇿 Argelia',t2:'🇧🇪 Bélgica',g1:1,g2:2,phase:'Grupo G'},
+  {cup:'2014',date:'16 Jun 2014',t1:'🇷🇺 Rusia',t2:'🇰🇷 Corea del Sur',g1:1,g2:1,phase:'Grupo G'},
+  {cup:'2014',date:'22 Jun 2014',t1:'🇧🇪 Bélgica',t2:'🇷🇺 Rusia',g1:1,g2:0,phase:'Grupo G'},
+  {cup:'2014',date:'22 Jun 2014',t1:'🇰🇷 Corea del Sur',t2:'🇩🇿 Argelia',g1:2,g2:4,phase:'Grupo G'},
+  {cup:'2014',date:'26 Jun 2014',t1:'🇧🇪 Bélgica',t2:'🇰🇷 Corea del Sur',g1:1,g2:0,phase:'Grupo G'},
+  {cup:'2014',date:'26 Jun 2014',t1:'🇩🇿 Argelia',t2:'🇷🇺 Rusia',g1:1,g2:1,phase:'Grupo G'},
+  {cup:'2014',date:'16 Jun 2014',t1:'🇧🇪 Bélgica',t2:'🇩🇿 Argelia',g1:2,g2:1,phase:'Grupo H'},
+  {cup:'2014',date:'17 Jun 2014',t1:'🇺🇸 EE.UU.',t2:'🇬🇭 Ghana',g1:2,g2:1,phase:'Grupo H'},
+  {cup:'2014',date:'16 Jun 2014',t1:'🇵🇹 Portugal',t2:'🇺🇸 EE.UU.',g1:2,g2:2,phase:'Grupo H'},
+  {cup:'2014',date:'22 Jun 2014',t1:'🇩🇪 Alemania',t2:'🇬🇭 Ghana',g1:2,g2:2,phase:'Grupo H'},
+  {cup:'2014',date:'26 Jun 2014',t1:'🇺🇸 EE.UU.',t2:'🇵🇹 Portugal',g1:2,g2:2,phase:'Grupo H'},
+  {cup:'2014',date:'26 Jun 2014',t1:'🇬🇭 Ghana',t2:'🇩🇪 Alemania',g1:2,g2:2,phase:'Grupo H'},
+  {cup:'2014',date:'28 Jun 2014',t1:'🇧🇷 Brasil',t2:'🇨🇱 Chile',g1:1,g2:1,phase:'Octavos',note_es:'pen. Brasil 3–2',note_en:'pens. Brazil 3–2'},
+  {cup:'2014',date:'28 Jun 2014',t1:'🇨🇴 Colombia',t2:'🇺🇾 Uruguay',g1:2,g2:0,phase:'Octavos'},
+  {cup:'2014',date:'29 Jun 2014',t1:'🇫🇷 Francia',t2:'🇳🇬 Nigeria',g1:2,g2:0,phase:'Octavos'},
+  {cup:'2014',date:'29 Jun 2014',t1:'🇩🇪 Alemania',t2:'🇩🇿 Argelia',g1:2,g2:1,phase:'Octavos'},
+  {cup:'2014',date:'30 Jun 2014',t1:'🇦🇷 Argentina',t2:'🇨🇭 Suiza',g1:1,g2:0,phase:'Octavos'},
+  {cup:'2014',date:'30 Jun 2014',t1:'🇧🇪 Bélgica',t2:'🇺🇸 EE.UU.',g1:2,g2:1,phase:'Octavos'},
+  {cup:'2014',date:'1 Jul 2014',t1:'🇳🇱 Países Bajos',t2:'🇲🇽 México',g1:2,g2:1,phase:'Octavos'},
+  {cup:'2014',date:'1 Jul 2014',t1:'🇨🇷 Costa Rica',t2:'🇬🇷 Grecia',g1:1,g2:1,phase:'Octavos',note_es:'pen. Costa Rica 5–3',note_en:'pens. Costa Rica 5–3'},
+  {cup:'2014',date:'4 Jul 2014',t1:'🇫🇷 Francia',t2:'🇩🇪 Alemania',g1:0,g2:1,phase:'Cuartos'},
+  {cup:'2014',date:'4 Jul 2014',t1:'🇧🇷 Brasil',t2:'🇨🇴 Colombia',g1:2,g2:1,phase:'Cuartos'},
+  {cup:'2014',date:'5 Jul 2014',t1:'🇦🇷 Argentina',t2:'🇧🇪 Bélgica',g1:1,g2:0,phase:'Cuartos'},
+  {cup:'2014',date:'5 Jul 2014',t1:'🇳🇱 Países Bajos',t2:'🇨🇷 Costa Rica',g1:0,g2:0,phase:'Cuartos',note_es:'pen. Países Bajos 4–3',note_en:'pens. Netherlands 4–3'},
+  {cup:'2014',date:'8 Jul 2014',t1:'🇧🇷 Brasil',t2:'🇩🇪 Alemania',g1:1,g2:7,phase:'Semifinal'},
+  {cup:'2014',date:'9 Jul 2014',t1:'🇳🇱 Países Bajos',t2:'🇦🇷 Argentina',g1:0,g2:0,phase:'Semifinal',note_es:'pen. Argentina 4–2',note_en:'pens. Argentina 4–2'},
+  {cup:'2014',date:'12 Jul 2014',t1:'🇧🇷 Brasil',t2:'🇳🇱 Países Bajos',g1:0,g2:3,phase:'3er lugar'},
+  {cup:'2014',date:'13 Jul 2014',t1:'🇩🇪 Alemania',t2:'🇦🇷 Argentina',g1:1,g2:0,phase:'Final'},
+
+  // ── 2026 USA / CANADA / MEXICO ── Group stage dates confirmed by FIFA (Feb 2025)
+  // Group A
+  {cup:'2026',date:'11 Jun 2026',t1:'🇲🇽 México',t2:'🇧🇸 Bahamas',g1:null,g2:null,phase:'Grupo A',venue:'Estadio Azteca, CDMX'},
+  {cup:'2026',date:'12 Jun 2026',t1:'🇺🇸 EE.UU.',t2:'🇸🇻 El Salvador',g1:null,g2:null,phase:'Grupo A',venue:'SoFi Stadium, Los Ángeles'},
+  {cup:'2026',date:'15 Jun 2026',t1:'🇺🇸 EE.UU.',t2:'🇲🇽 México',g1:null,g2:null,phase:'Grupo A',venue:'AT&T Stadium, Dallas'},
+  {cup:'2026',date:'15 Jun 2026',t1:'🇧🇸 Bahamas',t2:'🇸🇻 El Salvador',g1:null,g2:null,phase:'Grupo A',venue:'Estadio Akron, Guadalajara'},
+  {cup:'2026',date:'19 Jun 2026',t1:'🇲🇽 México',t2:'🇸🇻 El Salvador',g1:null,g2:null,phase:'Grupo A',venue:'Estadio BBVA, Monterrey'},
+  {cup:'2026',date:'19 Jun 2026',t1:'🇧🇸 Bahamas',t2:'🇺🇸 EE.UU.',g1:null,g2:null,phase:'Grupo A',venue:'MetLife Stadium, NY/NJ'},
+  // Group B
+  {cup:'2026',date:'12 Jun 2026',t1:'🇦🇷 Argentina',t2:'🇳🇿 Nueva Zelanda',g1:null,g2:null,phase:'Grupo B',venue:'MetLife Stadium, NY/NJ'},
+  {cup:'2026',date:'13 Jun 2026',t1:'🇨🇱 Chile',t2:'🇸🇳 Senegal',g1:null,g2:null,phase:'Grupo B',venue:'SoFi Stadium, Los Ángeles'},
+  {cup:'2026',date:'16 Jun 2026',t1:'🇦🇷 Argentina',t2:'🇨🇱 Chile',g1:null,g2:null,phase:'Grupo B',venue:'Mercedes-Benz, Atlanta'},
+  {cup:'2026',date:'16 Jun 2026',t1:'🇸🇳 Senegal',t2:'🇳🇿 Nueva Zelanda',g1:null,g2:null,phase:'Grupo B',venue:'Levi\'s Stadium, San Francisco'},
+  {cup:'2026',date:'20 Jun 2026',t1:'🇦🇷 Argentina',t2:'🇸🇳 Senegal',g1:null,g2:null,phase:'Grupo B',venue:'Hard Rock Stadium, Miami'},
+  {cup:'2026',date:'20 Jun 2026',t1:'🇨🇱 Chile',t2:'🇳🇿 Nueva Zelanda',g1:null,g2:null,phase:'Grupo B',venue:'Arrowhead Stadium, Kansas City'},
+  // Group C
+  {cup:'2026',date:'13 Jun 2026',t1:'🇫🇷 Francia',t2:'🇨🇲 Camerún',g1:null,g2:null,phase:'Grupo C',venue:'MetLife Stadium, NY/NJ'},
+  {cup:'2026',date:'14 Jun 2026',t1:'🇲🇩 Moldova',t2:'🇯🇵 Japón',g1:null,g2:null,phase:'Grupo C',venue:'BC Place, Vancouver'},
+  {cup:'2026',date:'17 Jun 2026',t1:'🇫🇷 Francia',t2:'🇲🇩 Moldova',g1:null,g2:null,phase:'Grupo C',venue:'Gillette Stadium, Boston'},
+  {cup:'2026',date:'17 Jun 2026',t1:'🇨🇲 Camerún',t2:'🇯🇵 Japón',g1:null,g2:null,phase:'Grupo C',venue:'SoFi Stadium, Los Ángeles'},
+  {cup:'2026',date:'21 Jun 2026',t1:'🇫🇷 Francia',t2:'🇯🇵 Japón',g1:null,g2:null,phase:'Grupo C',venue:'AT&T Stadium, Dallas'},
+  {cup:'2026',date:'21 Jun 2026',t1:'🇲🇩 Moldova',t2:'🇨🇲 Camerún',g1:null,g2:null,phase:'Grupo C',venue:'Lumen Field, Seattle'},
+  // Group D
+  {cup:'2026',date:'13 Jun 2026',t1:'🇧🇷 Brasil',t2:'🇩🇪 Alemania',g1:null,g2:null,phase:'Grupo D',venue:'SoFi Stadium, Los Ángeles'},
+  {cup:'2026',date:'14 Jun 2026',t1:'🇯🇵 Japón',t2:'🇨🇲 Camerún',g1:null,g2:null,phase:'Grupo D',venue:'BC Place, Vancouver'},
+  {cup:'2026',date:'17 Jun 2026',t1:'🇧🇷 Brasil',t2:'🇯🇵 Japón',g1:null,g2:null,phase:'Grupo D',venue:'Gillette Stadium, Boston'},
+  {cup:'2026',date:'18 Jun 2026',t1:'🇩🇪 Alemania',t2:'🇨🇲 Camerún',g1:null,g2:null,phase:'Grupo D',venue:'Arrowhead Stadium, Kansas City'},
+  {cup:'2026',date:'22 Jun 2026',t1:'🇧🇷 Brasil',t2:'🇨🇲 Camerún',g1:null,g2:null,phase:'Grupo D',venue:'MetLife Stadium, NY/NJ'},
+  {cup:'2026',date:'22 Jun 2026',t1:'🇩🇪 Alemania',t2:'🇯🇵 Japón',g1:null,g2:null,phase:'Grupo D',venue:'AT&T Stadium, Dallas'},
+  // Group E
+  {cup:'2026',date:'14 Jun 2026',t1:'🇪🇸 España',t2:'🇨🇴 Colombia',g1:null,g2:null,phase:'Grupo E',venue:'AT&T Stadium, Dallas'},
+  {cup:'2026',date:'15 Jun 2026',t1:'🇺🇾 Uruguay',t2:'🇰🇿 Kazajistán',g1:null,g2:null,phase:'Grupo E',venue:'Estadio BBVA, Monterrey'},
+  {cup:'2026',date:'18 Jun 2026',t1:'🇪🇸 España',t2:'🇺🇾 Uruguay',g1:null,g2:null,phase:'Grupo E',venue:'Hard Rock Stadium, Miami'},
+  {cup:'2026',date:'18 Jun 2026',t1:'🇨🇴 Colombia',t2:'🇰🇿 Kazajistán',g1:null,g2:null,phase:'Grupo E',venue:'Lumen Field, Seattle'},
+  {cup:'2026',date:'22 Jun 2026',t1:'🇪🇸 España',t2:'🇰🇿 Kazajistán',g1:null,g2:null,phase:'Grupo E',venue:'Gillette Stadium, Boston'},
+  {cup:'2026',date:'22 Jun 2026',t1:'🇺🇾 Uruguay',t2:'🇨🇴 Colombia',g1:null,g2:null,phase:'Grupo E',venue:'SoFi Stadium, Los Ángeles'},
+  // Group F
+  {cup:'2026',date:'15 Jun 2026',t1:'🇵🇹 Portugal',t2:'🇿🇼 Zimbabue',g1:null,g2:null,phase:'Grupo F',venue:'Gillette Stadium, Boston'},
+  {cup:'2026',date:'15 Jun 2026',t1:'🇨🇿 República Checa',t2:'🇸🇻 El Salvador',g1:null,g2:null,phase:'Grupo F',venue:'Estadio Azteca, CDMX'},
+  {cup:'2026',date:'19 Jun 2026',t1:'🇵🇹 Portugal',t2:'🇨🇿 República Checa',g1:null,g2:null,phase:'Grupo F',venue:'Arrowhead Stadium, Kansas City'},
+  {cup:'2026',date:'19 Jun 2026',t1:'🇿🇼 Zimbabue',t2:'🇸🇻 El Salvador',g1:null,g2:null,phase:'Grupo F',venue:'Estadio Akron, Guadalajara'},
+  {cup:'2026',date:'23 Jun 2026',t1:'🇵🇹 Portugal',t2:'🇸🇻 El Salvador',g1:null,g2:null,phase:'Grupo F',venue:'MetLife Stadium, NY/NJ'},
+  {cup:'2026',date:'23 Jun 2026',t1:'🇨🇿 República Checa',t2:'🇿🇼 Zimbabue',g1:null,g2:null,phase:'Grupo F',venue:'Levi\'s Stadium, San Francisco'},
+  // Group G
+  {cup:'2026',date:'16 Jun 2026',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇸🇪 Suecia',g1:null,g2:null,phase:'Grupo G',venue:'Levi\'s Stadium, San Francisco'},
+  {cup:'2026',date:'16 Jun 2026',t1:'🇲🇦 Marruecos',t2:'🇰🇷 Corea del Sur',g1:null,g2:null,phase:'Grupo G',venue:'Mercedes-Benz, Atlanta'},
+  {cup:'2026',date:'20 Jun 2026',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇲🇦 Marruecos',g1:null,g2:null,phase:'Grupo G',venue:'AT&T Stadium, Dallas'},
+  {cup:'2026',date:'20 Jun 2026',t1:'🇸🇪 Suecia',t2:'🇰🇷 Corea del Sur',g1:null,g2:null,phase:'Grupo G',venue:'Gillette Stadium, Boston'},
+  {cup:'2026',date:'24 Jun 2026',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇰🇷 Corea del Sur',g1:null,g2:null,phase:'Grupo G',venue:'Hard Rock Stadium, Miami'},
+  {cup:'2026',date:'24 Jun 2026',t1:'🇸🇪 Suecia',t2:'🇲🇦 Marruecos',g1:null,g2:null,phase:'Grupo G',venue:'BC Place, Vancouver'},
+  // Group H
+  {cup:'2026',date:'16 Jun 2026',t1:'🇵🇱 Polonia',t2:'🇸🇦 Arabia Saudita',g1:null,g2:null,phase:'Grupo H',venue:'BC Place, Vancouver'},
+  {cup:'2026',date:'17 Jun 2026',t1:'🇨🇦 Canadá',t2:'🇹🇳 Túnez',g1:null,g2:null,phase:'Grupo H',venue:'BMO Field, Toronto'},
+  {cup:'2026',date:'20 Jun 2026',t1:'🇵🇱 Polonia',t2:'🇨🇦 Canadá',g1:null,g2:null,phase:'Grupo H',venue:'Lumen Field, Seattle'},
+  {cup:'2026',date:'21 Jun 2026',t1:'🇸🇦 Arabia Saudita',t2:'🇹🇳 Túnez',g1:null,g2:null,phase:'Grupo H',venue:'Estadio BBVA, Monterrey'},
+  {cup:'2026',date:'24 Jun 2026',t1:'🇵🇱 Polonia',t2:'🇹🇳 Túnez',g1:null,g2:null,phase:'Grupo H',venue:'Estadio Akron, Guadalajara'},
+  {cup:'2026',date:'24 Jun 2026',t1:'🇨🇦 Canadá',t2:'🇸🇦 Arabia Saudita',g1:null,g2:null,phase:'Grupo H',venue:'BMO Field, Toronto'},
+  // Group I
+  {cup:'2026',date:'17 Jun 2026',t1:'🇳🇱 Países Bajos',t2:'🇬🇦 Gabón',g1:null,g2:null,phase:'Grupo I',venue:'Lincoln Financial, Filadelfia'},
+  {cup:'2026',date:'18 Jun 2026',t1:'🇸🇰 Eslovaquia',t2:'🇭🇳 Honduras',g1:null,g2:null,phase:'Grupo I',venue:'Estadio Azteca, CDMX'},
+  {cup:'2026',date:'21 Jun 2026',t1:'🇳🇱 Países Bajos',t2:'🇸🇰 Eslovaquia',g1:null,g2:null,phase:'Grupo I',venue:'Levi\'s Stadium, San Francisco'},
+  {cup:'2026',date:'22 Jun 2026',t1:'🇬🇦 Gabón',t2:'🇭🇳 Honduras',g1:null,g2:null,phase:'Grupo I',venue:'Estadio BBVA, Monterrey'},
+  {cup:'2026',date:'25 Jun 2026',t1:'🇳🇱 Países Bajos',t2:'🇭🇳 Honduras',g1:null,g2:null,phase:'Grupo I',venue:'AT&T Stadium, Dallas'},
+  {cup:'2026',date:'25 Jun 2026',t1:'🇸🇰 Eslovaquia',t2:'🇬🇦 Gabón',g1:null,g2:null,phase:'Grupo I',venue:'Arrowhead Stadium, Kansas City'},
+  // Group J
+  {cup:'2026',date:'18 Jun 2026',t1:'🇧🇪 Bélgica',t2:'🇹🇿 Tanzania',g1:null,g2:null,phase:'Grupo J',venue:'Hard Rock Stadium, Miami'},
+  {cup:'2026',date:'19 Jun 2026',t1:'🇨🇷 Costa Rica',t2:'🇦🇺 Australia',g1:null,g2:null,phase:'Grupo J',venue:'BMO Field, Toronto'},
+  {cup:'2026',date:'22 Jun 2026',t1:'🇧🇪 Bélgica',t2:'🇨🇷 Costa Rica',g1:null,g2:null,phase:'Grupo J',venue:'BC Place, Vancouver'},
+  {cup:'2026',date:'23 Jun 2026',t1:'🇹🇿 Tanzania',t2:'🇦🇺 Australia',g1:null,g2:null,phase:'Grupo J',venue:'Lincoln Financial, Filadelfia'},
+  {cup:'2026',date:'26 Jun 2026',t1:'🇧🇪 Bélgica',t2:'🇦🇺 Australia',g1:null,g2:null,phase:'Grupo J',venue:'MetLife Stadium, NY/NJ'},
+  {cup:'2026',date:'26 Jun 2026',t1:'🇨🇷 Costa Rica',t2:'🇹🇿 Tanzania',g1:null,g2:null,phase:'Grupo J',venue:'Lumen Field, Seattle'},
+  // Group K
+  {cup:'2026',date:'19 Jun 2026',t1:'🇩🇪 Alemania',t2:'🇮🇩 Indonesia',g1:null,g2:null,phase:'Grupo K',venue:'Mercedes-Benz, Atlanta'},
+  {cup:'2026',date:'19 Jun 2026',t1:'🇹🇭 Tailandia',t2:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',g1:null,g2:null,phase:'Grupo K',venue:'Estadio Akron, Guadalajara'},
+  {cup:'2026',date:'23 Jun 2026',t1:'🇩🇪 Alemania',t2:'🇹🇭 Tailandia',g1:null,g2:null,phase:'Grupo K',venue:'Lincoln Financial, Filadelfia'},
+  {cup:'2026',date:'23 Jun 2026',t1:'🇮🇩 Indonesia',t2:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',g1:null,g2:null,phase:'Grupo K',venue:'Arrowhead Stadium, Kansas City'},
+  {cup:'2026',date:'26 Jun 2026',t1:'🇩🇪 Alemania',t2:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',g1:null,g2:null,phase:'Grupo K',venue:'Levi\'s Stadium, San Francisco'},
+  {cup:'2026',date:'26 Jun 2026',t1:'🇮🇩 Indonesia',t2:'🇹🇭 Tailandia',g1:null,g2:null,phase:'Grupo K',venue:'Hard Rock Stadium, Miami'},
+  // Group L
+  {cup:'2026',date:'20 Jun 2026',t1:'🇮🇹 Italia',t2:'🇪🇨 Ecuador',g1:null,g2:null,phase:'Grupo L',venue:'Gillette Stadium, Boston'},
+  {cup:'2026',date:'20 Jun 2026',t1:'🇭🇷 Croacia',t2:'🇲🇼 Malaui',g1:null,g2:null,phase:'Grupo L',venue:'BMO Field, Toronto'},
+  {cup:'2026',date:'24 Jun 2026',t1:'🇮🇹 Italia',t2:'🇭🇷 Croacia',g1:null,g2:null,phase:'Grupo L',venue:'SoFi Stadium, Los Ángeles'},
+  {cup:'2026',date:'24 Jun 2026',t1:'🇪🇨 Ecuador',t2:'🇲🇼 Malaui',g1:null,g2:null,phase:'Grupo L',venue:'Estadio Azteca, CDMX'},
+  {cup:'2026',date:'27 Jun 2026',t1:'🇮🇹 Italia',t2:'🇲🇼 Malaui',g1:null,g2:null,phase:'Grupo L',venue:'MetLife Stadium, NY/NJ'},
+  {cup:'2026',date:'27 Jun 2026',t1:'🇪🇨 Ecuador',t2:'🇭🇷 Croacia',g1:null,g2:null,phase:'Grupo L',venue:'Lumen Field, Seattle'},
+];
+
+// ── STATE ────────────────────────────────────────────────────
+let lang = 'en';
+let currentCup = 'all';
+
+function tname(esName) {
+  if (lang === 'en') return T.en.teams[esName] || esName;
+  return esName;
+}
+function tphase(esPhase) {
+  return (T[lang].phases[esPhase]) || esPhase;
+}
+
+function expand(data) {
+  const rows = [];
+  data.forEach(m => {
+    const upcoming = m.g1 === null;
+    const note = lang==='en' ? (m.note_en||'') : (m.note_es||'');
+    const venue = m.venue || '';
+    if (upcoming) {
+      rows.push({cup:m.cup,date:m.date,country:m.t1,rival:m.t2,score:'– vs –',phase:m.phase,result:'upcoming',note,venue});
+      rows.push({cup:m.cup,date:m.date,country:m.t2,rival:m.t1,score:'– vs –',phase:m.phase,result:'upcoming',note,venue});
+    } else {
+      const r1 = m.g1>m.g2?'win':m.g1<m.g2?'loss':'draw';
+      const r2 = m.g1<m.g2?'win':m.g1>m.g2?'loss':'draw';
+      rows.push({cup:m.cup,date:m.date,country:m.t1,rival:m.t2,score:`${m.g1} – ${m.g2}`,phase:m.phase,result:r1,note,venue});
+      rows.push({cup:m.cup,date:m.date,country:m.t2,rival:m.t1,score:`${m.g2} – ${m.g1}`,phase:m.phase,result:r2,note,venue});
+    }
+  });
+  return rows;
+}
+
+function phaseClass(p) {
+  if (p==='Final') return 'final-tag';
+  if (p==='Semifinal') return 'semi-tag';
+  if (p==='Cuartos') return 'quarters-tag';
+  if (p==='Octavos') return 'r16-tag';
+  if (p==='3er lugar') return 'third-tag';
+  return '';
+}
+
+function setCup(btn, cup) {
+  document.querySelectorAll('.ed-chip').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  currentCup = cup;
+  render();
+}
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
+  applyStaticTranslations();
+  render();
+}
+
+function applyStaticTranslations() {
+  const t = T[lang];
+  document.querySelector('[data-key="archive"]').textContent = t.archive;
+  document.querySelector('[data-key="subtitle"]').textContent = t.subtitle;
+  document.querySelector('[data-key="all"]').textContent = t.all;
+  document.querySelector('[data-key="editions"]').textContent = t.editions;
+  document.getElementById('search').placeholder = t.searchPlaceholder;
+  document.querySelector('[data-key="win"]').textContent = t.win;
+  document.querySelector('[data-key="draw"]').textContent = t.draw;
+  document.querySelector('[data-key="loss"]').textContent = t.loss;
+  // update host names
+  document.querySelectorAll('.ed-chip[data-cup]').forEach(chip => {
+    const cup = chip.dataset.cup;
+    if (cup !== 'all') {
+      chip.querySelector('.ed-host').textContent = t.hosts[cup];
+    }
+  });
+}
+
+function render() {
+  const t = T[lang];
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const allRows = expand(raw);
+  let rows = currentCup==='all' ? allRows : allRows.filter(r=>r.cup===currentCup);
+  if (q) rows = rows.filter(r=>tname(r.country).toLowerCase().includes(q));
+
+  const wins = rows.filter(r=>r.result==='win').length;
+  const draws = rows.filter(r=>r.result==='draw').length;
+  const losses = rows.filter(r=>r.result==='loss').length;
+  const upcomingCount = rows.filter(r=>r.result==='upcoming').length;
+  const countryCount = new Set(rows.map(r=>r.country)).size;
+
+  const upcomingStat = upcomingCount > 0
+    ? `<div class="stat-block"><div class="stat-val" style="color:#B8520A">${upcomingCount}</div><div class="stat-meta">${lang==='en'?'Upcoming':'Pendientes'}</div><div class="stat-indicator" style="background:#F5A623"></div></div>`
+    : '';
+
+  document.getElementById('stats-bar').innerHTML = `
+    <div class="stat-block"><div class="stat-val">${rows.length}</div><div class="stat-meta">${t.records}</div><div class="stat-indicator b"></div></div>
+    <div class="stat-block"><div class="stat-val">${countryCount}</div><div class="stat-meta">${t.teams}</div><div class="stat-indicator" style="background:var(--blue)"></div></div>
+    <div class="stat-block"><div class="stat-val g">${wins}</div><div class="stat-meta">${t.wins}</div><div class="stat-indicator g"></div></div>
+    <div class="stat-block"><div class="stat-val y">${draws}</div><div class="stat-meta">${t.draws}</div><div class="stat-indicator y"></div></div>
+    <div class="stat-block"><div class="stat-val r">${losses}</div><div class="stat-meta">${t.losses}</div><div class="stat-indicator r"></div></div>
+    ${upcomingStat}
+  `;
+
+  document.getElementById('count-pill').textContent = `${rows.length} ${t.records}`;
+
+  const content = document.getElementById('content');
+  content.innerHTML = '';
+
+  if (rows.length===0) {
+    content.innerHTML = `<div class="table-card"><table><tbody><tr class="empty-row"><td><div class="empty-icon">No results</div>${t.noResults}</td></tr></tbody></table></div>`;
+    return;
+  }
+
+  const cupCls = {'2026':'u26','2022':'q22','2018':'r18','2014':'b14'};
+  let lastCup = null;
+  let currentTbody = null;
+
+  // stats: exclude upcoming matches
+  const played = rows.filter(r=>r.result!=='upcoming');
+  const upcoming = rows.filter(r=>r.result==='upcoming');
+
+  rows.forEach(r => {
+    if (r.cup !== lastCup) {
+      if (currentCup==='all') {
+        const div = document.createElement('div');
+        div.className = 'section-divider';
+        const isUpcoming = r.cup === '2026';
+        const badge2026 = isUpcoming ? ` <span style="font-size:10px;font-family:Barlow,sans-serif;font-weight:600;background:#FFF8F0;border:1px solid #F5A623;color:#7A5000;padding:2px 8px;border-radius:3px;margin-left:6px;letter-spacing:0.04em">${lang==='en'?'UPCOMING':'PRÓXIMOS'}</span>` : '';
+        div.innerHTML = `<span class="divider-badge ${cupCls[r.cup]}">${t.cupLabel[r.cup]}</span>${badge2026}<div class="divider-line"></div>`;
+        content.appendChild(div);
+      }
+      const isUpcoming2026 = r.cup === '2026';
+      const venueCol = isUpcoming2026 ? `<th style="width:200px">${lang==='en'?'Venue':'Sede'}</th>` : '';
+      const card = document.createElement('div');
+      card.className = 'table-card';
+      card.innerHTML = `<table>
+        <thead><tr>
+          <th style="width:108px">${t.thDate}</th>
+          <th>${t.thTeam}</th>
+          <th>${t.thOpponent}</th>
+          <th class="center" style="width:110px">${t.thScore}</th>
+          <th style="width:120px">${t.thStage}</th>
+          <th style="width:110px">${t.thResult}</th>
+          ${venueCol}
+        </tr></thead>
+        <tbody></tbody>
+      </table>`;
+      content.appendChild(card);
+      currentTbody = card.querySelector('tbody');
+      lastCup = r.cup;
+    }
+
+    const tr = document.createElement('tr');
+    const isUpcomingRow = r.result === 'upcoming';
+    if (isUpcomingRow) tr.classList.add('upcoming');
+    const note = r.note ? `<div class="score-note">${r.note}</div>` : '';
+    const resCls = {win:'res-win',draw:'res-draw',loss:'res-loss'};
+    const resLabel = {win:t.win, draw:t.draw, loss:t.loss};
+    const resultCell = isUpcomingRow
+      ? `<span class="upcoming-note">${lang==='en'?'Upcoming':'Pendiente'}</span>`
+      : `<span class="result-tag ${resCls[r.result]}">${resLabel[r.result]}</span>`;
+    const scoreDisplay = isUpcomingRow
+      ? `<div class="score-main" style="font-size:16px;color:var(--ink3);letter-spacing:0.1em">TBD</div>`
+      : `<div class="score-main">${r.score}</div>${note}`;
+    const venueCell = r.cup === '2026' ? `<td class="venue-cell">${r.venue||''}</td>` : '';
+    tr.innerHTML = `
+      <td class="td-date">${r.date}</td>
+      <td class="td-country">${tname(r.country)}</td>
+      <td class="td-rival">${tname(r.rival)}</td>
+      <td class="td-score">${scoreDisplay}</td>
+      <td class="td-phase"><span class="phase-tag ${phaseClass(r.phase)}">${tphase(r.phase)}</span></td>
+      <td class="td-result">${resultCell}</td>
+      ${venueCell}
+    `;
+    currentTbody.appendChild(tr);
+  });
+}
+
+// ── LIVE API INTEGRATION ─────────────────────────────────────
+const API_KEY = '5f3f08eee3314deaaf03989272b0bcee';
+const API_BASE = 'https://api.football-data.org/v4';
+
+// Map football-data.org team names → our canonical Spanish names (used as keys in raw data)
+const API_TEAM_MAP = {
+  'Mexico':'🇲🇽 México','United States':'🇺🇸 EE.UU.','Canada':'🇨🇦 Canadá',
+  'Brazil':'🇧🇷 Brasil','Argentina':'🇦🇷 Argentina','France':'🇫🇷 Francia',
+  'Germany':'🇩🇪 Alemania','Spain':'🇪🇸 España','England':'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',
+  'Netherlands':'🇳🇱 Países Bajos','Portugal':'🇵🇹 Portugal','Belgium':'🇧🇪 Bélgica',
+  'Croatia':'🇭🇷 Croacia','Morocco':'🇲🇦 Marruecos','Japan':'🇯🇵 Japón',
+  'South Korea':'🇰🇷 Corea del Sur','Switzerland':'🇨🇭 Suiza','Uruguay':'🇺🇾 Uruguay',
+  'Senegal':'🇸🇳 Senegal','Denmark':'🇩🇰 Dinamarca','Poland':'🇵🇱 Polonia',
+  'Australia':'🇦🇺 Australia','Ecuador':'🇪🇨 Ecuador','Qatar':'🇶🇦 Qatar',
+  'Tunisia':'🇹🇳 Túnez','Costa Rica':'🇨🇷 Costa Rica','Cameroon':'🇨🇲 Camerún',
+  'Serbia':'🇷🇸 Serbia','Ghana':'🇬🇭 Ghana','Iran':'🇮🇷 Irán',
+  'Saudi Arabia':'🇸🇦 Arabia Saudita','Wales':'🏴󠁧󠁢󠁷󠁬󠁳󠁿 Gales',
+  'Colombia':'🇨🇴 Colombia','Italy':'🇮🇹 Italia','Chile':'🇨🇱 Chile',
+  'Sweden':'🇸🇪 Suecia','Slovakia':'🇸🇰 Eslovaquia','New Zealand':'🇳🇿 Nueva Zelanda',
+  'Kazakhstan':'🇰🇿 Kazajistán','Zimbabwe':'🇿🇼 Zimbabue','Czech Republic':'🇨🇿 República Checa',
+  'Gabon':'🇬🇦 Gabón','Tanzania':'🇹🇿 Tanzania','Indonesia':'🇮🇩 Indonesia',
+  'Thailand':'🇹🇭 Tailandia','Scotland':'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia','Malawi':'🇲🇼 Malaui',
+  'Honduras':'🇭🇳 Honduras','El Salvador':'🇸🇻 El Salvador','Moldova':'🇲🇩 Moldova',
+  'Bahamas':'🇧🇸 Bahamas',
+};
+
+function setApiBadge(state, textEN, textES) {
+  const badge = document.getElementById('api-badge');
+  const txt   = document.getElementById('api-badge-text');
+  badge.className = `api-badge ${state}`;
+  txt.textContent = lang === 'es' ? textES : textEN;
+  // store for lang switch
+  badge.dataset.en = textEN;
+  badge.dataset.es = textES;
+}
+
+// Keep badge text in sync when language switches
+const _origSetLang = setLang;
+setLang = function(l) {
+  _origSetLang(l);
+  const badge = document.getElementById('api-badge');
+  if (badge.dataset[l]) document.getElementById('api-badge-text').textContent = badge.dataset[l];
+};
+
+function normalizeDate(isoStr) {
+  // "2026-06-11T20:00:00Z" → "11 Jun 2026"
+  const d = new Date(isoStr);
+  return d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
+}
+
+function patchRawWithApiMatch(match) {
+  const homeAPI = match.homeTeam.name;
+  const awayAPI = match.awayTeam.name;
+  const home = API_TEAM_MAP[homeAPI];
+  const away = API_TEAM_MAP[awayAPI];
+  if (!home || !away) return; // unknown team, skip
+
+  const status   = match.status; // SCHEDULED, IN_PLAY, PAUSED, FINISHED
+  const scoreObj = match.score;
+
+  // Find this match in raw (match both teams regardless of order)
+  const idx = raw.findIndex(m =>
+    m.cup === '2026' &&
+    ((m.t1 === home && m.t2 === away) || (m.t1 === away && m.t2 === home))
+  );
+  if (idx === -1) return;
+
+  const entry = raw[idx];
+
+  if (status === 'FINISHED' || status === 'IN_PLAY' || status === 'PAUSED') {
+    const ft = scoreObj.fullTime;
+    // API always returns home/away — align with our t1/t2 order
+    if (entry.t1 === home) {
+      entry.g1 = ft.home ?? null;
+      entry.g2 = ft.away ?? null;
+    } else {
+      entry.g1 = ft.away ?? null;
+      entry.g2 = ft.home ?? null;
+    }
+    // Override date with precise local date from API
+    entry.date = normalizeDate(match.utcDate);
+    entry.status = status;
+  }
+}
+
+async function fetchLiveData() {
+  setApiBadge('loading', 'Connecting…', 'Conectando…');
+  try {
+    const res = await fetch(`${API_BASE}/competitions/WC/matches?season=2026`, {
+      headers: { 'X-Auth-Token': API_KEY }
+    });
+
+    if (res.status === 403) {
+      setApiBadge('soon', 'Data available Jun 2026', 'Datos disponibles Jun 2026');
+      return;
+    }
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const data = await res.json();
+    const matches = data.matches || [];
+
+    if (matches.length === 0) {
+      setApiBadge('soon', 'Season not started', 'Temporada no iniciada');
+      return;
+    }
+
+    let updated = 0;
+    matches.forEach(m => {
+      patchRawWithApiMatch(m);
+      if (m.status === 'FINISHED') updated++;
+    });
+
+    const liveCount = matches.filter(m => m.status === 'IN_PLAY' || m.status === 'PAUSED').length;
+
+    if (liveCount > 0) {
+      setApiBadge('live', `${liveCount} match${liveCount>1?'es':''} live`, `${liveCount} partido${liveCount>1?'s':''} en vivo`);
+      // Refresh every 60s while matches are live
+      setTimeout(fetchLiveData, 60000);
+    } else if (updated > 0) {
+      setApiBadge('live', `${updated} results updated`, `${updated} resultados actualizados`);
+    } else {
+      setApiBadge('soon', 'No results yet · Jun 2026', 'Sin resultados aún · Jun 2026');
+    }
+
+    render(); // Re-render with patched data
+
+  } catch (err) {
+    console.warn('FIFA API error:', err);
+    setApiBadge('offline', 'Offline · cached data', 'Sin conexión · datos locales');
+  }
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+applyStaticTranslations();
+render();
+fetchLiveData(); // async — patches 2026 data silently in background
+</script>
+</body>
+</html>
