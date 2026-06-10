@@ -213,6 +213,7 @@ header {
 .divider-badge.r18 { background: #1A4FBA; }
 .divider-badge.b14 { background: #007A3D; }
 .divider-badge.u26 { background: #B8520A; }
+.divider-badge.s10 { background: #4A7C3F; }
 .divider-line { flex: 1; height: 1.5px; background: var(--line); }
 
 /* 2026 upcoming styles */
@@ -346,7 +347,7 @@ footer {
 <header>
   <div class="header-top">
     <span class="badge-pill" data-key="archive">Official Archive</span>
-    <span class="edition-pill">2014 · 2018 · 2022 · 2026</span>
+    <span class="edition-pill">2010 · 2014 · 2018 · 2022 · 2026</span>
     <span class="api-badge loading" id="api-badge">
       <span class="api-dot"></span>
       <span id="api-badge-text">Connecting…</span>
@@ -366,7 +367,7 @@ footer {
     <div class="editions-strip">
       <div class="ed-chip active" data-cup="all" onclick="setCup(this,'all')">
         <div class="ed-year" data-key="all">All</div>
-        <div class="ed-host" data-key="editions">4 editions</div>
+        <div class="ed-host" data-key="editions">5 editions</div>
       </div>
       <div class="ed-chip" data-cup="2026" onclick="setCup(this,'2026')">
         <div class="ed-year">2026</div>
@@ -383,6 +384,10 @@ footer {
       <div class="ed-chip" data-cup="2014" onclick="setCup(this,'2014')">
         <div class="ed-year">2014</div>
         <div class="ed-host">Brazil</div>
+      </div>
+      <div class="ed-chip" data-cup="2010" onclick="setCup(this,'2010')">
+        <div class="ed-year">2010</div>
+        <div class="ed-host">South Africa</div>
       </div>
     </div>
   </div>
@@ -405,22 +410,22 @@ footer {
 
 <div class="content" id="content"></div>
 
-<footer>FIFA World Cup · Historical Results · 2014 · 2018 · 2022 · 2026</footer>
+<footer>FIFA World Cup · Historical Results · 2010 · 2014 · 2018 · 2022 · 2026</footer>
 
 <script>
 // ── TRANSLATIONS ──────────────────────────────────────────────
 const T = {
   en: {
     archive: 'Official Archive', subtitle: 'Complete match record · Each game appears twice, once per team',
-    all: 'All', editions: '4 editions',
+    all: 'All', editions: '5 editions',
     searchPlaceholder: 'Search team…',
     records: 'records', teams: 'Teams', wins: 'Wins', draws: 'Draws', losses: 'Losses',
     win: 'Win', draw: 'Draw', loss: 'Loss',
     noResults: 'No results found for that team name.',
     footer: 'FIFA World Cup · Historical Results · 2014 · 2018 · 2022 · 2026',
     thDate: 'Date', thTeam: 'Team', thOpponent: 'Opponent', thScore: 'Score', thStage: 'Stage', thResult: 'Result',
-    cupLabel: {'2026':'USA/CAN/MEX 2026','2022':'Qatar 2022','2018':'Russia 2018','2014':'Brazil 2014'},
-    hosts: {'2026':'USA/CAN/MEX','2022':'Qatar','2018':'Russia','2014':'Brazil'},
+    cupLabel: {'2026':'USA/CAN/MEX 2026','2022':'Qatar 2022','2018':'Russia 2018','2014':'Brazil 2014','2010':'South Africa 2010'},
+    hosts: {'2026':'USA/CAN/MEX','2022':'Qatar','2018':'Russia','2014':'Brazil','2010':'South Africa'},
     phases: {
       'Grupo A':'Group A','Grupo B':'Group B','Grupo C':'Group C','Grupo D':'Group D',
       'Grupo E':'Group E','Grupo F':'Group F','Grupo G':'Group G','Grupo H':'Group H',
@@ -465,15 +470,15 @@ const T = {
   },
   es: {
     archive: 'Archivo Oficial', subtitle: 'Registro completo de partidos · Cada encuentro aparece dos veces, una por cada selección',
-    all: 'Todas', editions: '4 ediciones',
+    all: 'Todas', editions: '5 ediciones',
     searchPlaceholder: 'Buscar selección…',
     records: 'registros', teams: 'Selecciones', wins: 'Victorias', draws: 'Empates', losses: 'Derrotas',
     win: 'Victoria', draw: 'Empate', loss: 'Derrota',
     noResults: 'No se encontró ninguna selección con ese nombre.',
     footer: 'FIFA World Cup · Resultados Históricos · 2014 · 2018 · 2022 · 2026',
     thDate: 'Fecha', thTeam: 'Selección', thOpponent: 'Rival', thScore: 'Marcador', thStage: 'Fase', thResult: 'Resultado',
-    cupLabel: {'2026':'USA/CAN/MEX 2026','2022':'Qatar 2022','2018':'Rusia 2018','2014':'Brasil 2014'},
-    hosts: {'2026':'USA/CAN/MEX','2022':'Qatar','2018':'Rusia','2014':'Brasil'},
+    cupLabel: {'2026':'USA/CAN/MEX 2026','2022':'Qatar 2022','2018':'Rusia 2018','2014':'Brasil 2014','2010':'Sudáfrica 2010'},
+    hosts: {'2026':'USA/CAN/MEX','2022':'Qatar','2018':'Rusia','2014':'Brasil','2010':'Sudáfrica'},
     phases: {
       'Grupo A':'Grupo A','Grupo B':'Grupo B','Grupo C':'Grupo C','Grupo D':'Grupo D',
       'Grupo E':'Grupo E','Grupo F':'Grupo F','Grupo G':'Grupo G','Grupo H':'Grupo H',
@@ -615,7 +620,84 @@ const raw = [
   {cup:'2018',date:'11 Jul 2018',t1:'🇭🇷 Croacia',t2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',g1:2,g2:1,phase:'Semifinal'},
   {cup:'2018',date:'14 Jul 2018',t1:'🇧🇪 Bélgica',t2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',g1:2,g2:0,phase:'3er lugar'},
   {cup:'2018',date:'15 Jul 2018',t1:'🇫🇷 Francia',t2:'🇭🇷 Croacia',g1:4,g2:2,phase:'Final'},
-  {cup:'2014',date:'12 Jun 2014',t1:'🇧🇷 Brasil',t2:'🇭🇷 Croacia',g1:3,g2:1,phase:'Grupo A'},
+  // ── SUDÁFRICA 2010 ────────────────────────────────────────
+  // Grupo A
+  {cup:'2010',date:'11 Jun 2010',t1:'🇿🇦 Sudáfrica',t2:'🇲🇽 México',g1:1,g2:1,phase:'Grupo A'},
+  {cup:'2010',date:'11 Jun 2010',t1:'🇺🇾 Uruguay',t2:'🇫🇷 Francia',g1:0,g2:0,phase:'Grupo A'},
+  {cup:'2010',date:'16 Jun 2010',t1:'🇿🇦 Sudáfrica',t2:'🇺🇾 Uruguay',g1:0,g2:3,phase:'Grupo A'},
+  {cup:'2010',date:'17 Jun 2010',t1:'🇫🇷 Francia',t2:'🇲🇽 México',g1:0,g2:2,phase:'Grupo A'},
+  {cup:'2010',date:'22 Jun 2010',t1:'🇲🇽 México',t2:'🇺🇾 Uruguay',g1:0,g2:1,phase:'Grupo A'},
+  {cup:'2010',date:'22 Jun 2010',t1:'🇫🇷 Francia',t2:'🇿🇦 Sudáfrica',g1:1,g2:2,phase:'Grupo A'},
+  // Grupo B
+  {cup:'2010',date:'12 Jun 2010',t1:'🇦🇷 Argentina',t2:'🇳🇬 Nigeria',g1:1,g2:0,phase:'Grupo B'},
+  {cup:'2010',date:'12 Jun 2010',t1:'🇰🇷 Corea del Sur',t2:'🇬🇷 Grecia',g1:2,g2:0,phase:'Grupo B'},
+  {cup:'2010',date:'17 Jun 2010',t1:'🇦🇷 Argentina',t2:'🇰🇷 Corea del Sur',g1:4,g2:1,phase:'Grupo B'},
+  {cup:'2010',date:'17 Jun 2010',t1:'🇳🇬 Nigeria',t2:'🇬🇷 Grecia',g1:2,g2:1,phase:'Grupo B'},
+  {cup:'2010',date:'22 Jun 2010',t1:'🇦🇷 Argentina',t2:'🇬🇷 Grecia',g1:2,g2:0,phase:'Grupo B'},
+  {cup:'2010',date:'22 Jun 2010',t1:'🇳🇬 Nigeria',t2:'🇰🇷 Corea del Sur',g1:2,g2:2,phase:'Grupo B'},
+  // Grupo C
+  {cup:'2010',date:'12 Jun 2010',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇺🇸 EE.UU.',g1:1,g2:1,phase:'Grupo C'},
+  {cup:'2010',date:'13 Jun 2010',t1:'🇩🇿 Argelia',t2:'🇸🇮 Eslovenia',g1:0,g2:1,phase:'Grupo C'},
+  {cup:'2010',date:'18 Jun 2010',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇩🇿 Argelia',g1:0,g2:0,phase:'Grupo C'},
+  {cup:'2010',date:'18 Jun 2010',t1:'🇺🇸 EE.UU.',t2:'🇸🇮 Eslovenia',g1:2,g2:2,phase:'Grupo C'},
+  {cup:'2010',date:'23 Jun 2010',t1:'🇺🇸 EE.UU.',t2:'🇩🇿 Argelia',g1:1,g2:0,phase:'Grupo C'},
+  {cup:'2010',date:'23 Jun 2010',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇸🇮 Eslovenia',g1:1,g2:0,phase:'Grupo C'},
+  // Grupo D
+  {cup:'2010',date:'13 Jun 2010',t1:'🇩🇪 Alemania',t2:'🇦🇺 Australia',g1:4,g2:0,phase:'Grupo D'},
+  {cup:'2010',date:'13 Jun 2010',t1:'🇷🇸 Serbia',t2:'🇬🇭 Ghana',g1:0,g2:1,phase:'Grupo D'},
+  {cup:'2010',date:'18 Jun 2010',t1:'🇩🇪 Alemania',t2:'🇷🇸 Serbia',g1:0,g2:1,phase:'Grupo D'},
+  {cup:'2010',date:'19 Jun 2010',t1:'🇬🇭 Ghana',t2:'🇦🇺 Australia',g1:1,g2:1,phase:'Grupo D'},
+  {cup:'2010',date:'23 Jun 2010',t1:'🇩🇪 Alemania',t2:'🇬🇭 Ghana',g1:1,g2:0,phase:'Grupo D'},
+  {cup:'2010',date:'23 Jun 2010',t1:'🇦🇺 Australia',t2:'🇷🇸 Serbia',g1:2,g2:1,phase:'Grupo D'},
+  // Grupo E
+  {cup:'2010',date:'14 Jun 2010',t1:'🇳🇱 Países Bajos',t2:'🇩🇰 Dinamarca',g1:2,g2:0,phase:'Grupo E'},
+  {cup:'2010',date:'14 Jun 2010',t1:'🇯🇵 Japón',t2:'🇨🇲 Camerún',g1:1,g2:0,phase:'Grupo E'},
+  {cup:'2010',date:'19 Jun 2010',t1:'🇳🇱 Países Bajos',t2:'🇯🇵 Japón',g1:1,g2:0,phase:'Grupo E'},
+  {cup:'2010',date:'19 Jun 2010',t1:'🇨🇲 Camerún',t2:'🇩🇰 Dinamarca',g1:1,g2:2,phase:'Grupo E'},
+  {cup:'2010',date:'24 Jun 2010',t1:'🇳🇱 Países Bajos',t2:'🇨🇲 Camerún',g1:2,g2:1,phase:'Grupo E'},
+  {cup:'2010',date:'24 Jun 2010',t1:'🇩🇰 Dinamarca',t2:'🇯🇵 Japón',g1:1,g2:3,phase:'Grupo E'},
+  // Grupo F
+  {cup:'2010',date:'14 Jun 2010',t1:'🇮🇹 Italia',t2:'🇵🇾 Paraguay',g1:1,g2:1,phase:'Grupo F'},
+  {cup:'2010',date:'15 Jun 2010',t1:'🇳🇿 Nueva Zelanda',t2:'🇸🇰 Eslovaquia',g1:1,g2:1,phase:'Grupo F'},
+  {cup:'2010',date:'20 Jun 2010',t1:'🇮🇹 Italia',t2:'🇳🇿 Nueva Zelanda',g1:1,g2:1,phase:'Grupo F'},
+  {cup:'2010',date:'20 Jun 2010',t1:'🇸🇰 Eslovaquia',t2:'🇵🇾 Paraguay',g1:0,g2:2,phase:'Grupo F'},
+  {cup:'2010',date:'24 Jun 2010',t1:'🇸🇰 Eslovaquia',t2:'🇮🇹 Italia',g1:3,g2:2,phase:'Grupo F'},
+  {cup:'2010',date:'24 Jun 2010',t1:'🇵🇾 Paraguay',t2:'🇳🇿 Nueva Zelanda',g1:0,g2:0,phase:'Grupo F'},
+  // Grupo G
+  {cup:'2010',date:'15 Jun 2010',t1:'🇧🇷 Brasil',t2:'🇰🇵 Corea del Norte',g1:2,g2:1,phase:'Grupo G'},
+  {cup:'2010',date:'15 Jun 2010',t1:'🇨🇮 Costa de Marfil',t2:'🇵🇹 Portugal',g1:0,g2:0,phase:'Grupo G'},
+  {cup:'2010',date:'20 Jun 2010',t1:'🇧🇷 Brasil',t2:'🇨🇮 Costa de Marfil',g1:3,g2:1,phase:'Grupo G'},
+  {cup:'2010',date:'21 Jun 2010',t1:'🇵🇹 Portugal',t2:'🇰🇵 Corea del Norte',g1:7,g2:0,phase:'Grupo G'},
+  {cup:'2010',date:'25 Jun 2010',t1:'🇧🇷 Brasil',t2:'🇵🇹 Portugal',g1:0,g2:0,phase:'Grupo G'},
+  {cup:'2010',date:'25 Jun 2010',t1:'🇰🇵 Corea del Norte',t2:'🇨🇮 Costa de Marfil',g1:0,g2:3,phase:'Grupo G'},
+  // Grupo H
+  {cup:'2010',date:'16 Jun 2010',t1:'🇭🇳 Honduras',t2:'🇨🇱 Chile',g1:0,g2:1,phase:'Grupo H'},
+  {cup:'2010',date:'16 Jun 2010',t1:'🇪🇸 España',t2:'🇨🇭 Suiza',g1:0,g2:1,phase:'Grupo H'},
+  {cup:'2010',date:'21 Jun 2010',t1:'🇨🇱 Chile',t2:'🇨🇭 Suiza',g1:1,g2:0,phase:'Grupo H'},
+  {cup:'2010',date:'21 Jun 2010',t1:'🇪🇸 España',t2:'🇭🇳 Honduras',g1:2,g2:0,phase:'Grupo H'},
+  {cup:'2010',date:'25 Jun 2010',t1:'🇨🇱 Chile',t2:'🇪🇸 España',g1:1,g2:2,phase:'Grupo H'},
+  {cup:'2010',date:'25 Jun 2010',t1:'🇨🇭 Suiza',t2:'🇭🇳 Honduras',g1:0,g2:0,phase:'Grupo H'},
+  // Octavos
+  {cup:'2010',date:'26 Jun 2010',t1:'🇺🇾 Uruguay',t2:'🇰🇷 Corea del Sur',g1:2,g2:1,phase:'Octavos'},
+  {cup:'2010',date:'26 Jun 2010',t1:'🇺🇸 EE.UU.',t2:'🇬🇭 Ghana',g1:1,g2:2,phase:'Octavos'},
+  {cup:'2010',date:'27 Jun 2010',t1:'🇩🇪 Alemania',t2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',g1:4,g2:1,phase:'Octavos'},
+  {cup:'2010',date:'27 Jun 2010',t1:'🇦🇷 Argentina',t2:'🇲🇽 México',g1:3,g2:1,phase:'Octavos'},
+  {cup:'2010',date:'28 Jun 2010',t1:'🇳🇱 Países Bajos',t2:'🇸🇰 Eslovaquia',g1:2,g2:1,phase:'Octavos'},
+  {cup:'2010',date:'28 Jun 2010',t1:'🇧🇷 Brasil',t2:'🇨🇱 Chile',g1:3,g2:0,phase:'Octavos'},
+  {cup:'2010',date:'29 Jun 2010',t1:'🇵🇾 Paraguay',t2:'🇯🇵 Japón',g1:0,g2:0,phase:'Octavos',note_es:'pen. Paraguay 5–3',note_en:'pens. Paraguay 5–3'},
+  {cup:'2010',date:'29 Jun 2010',t1:'🇪🇸 España',t2:'🇵🇹 Portugal',g1:1,g2:0,phase:'Octavos'},
+  // Cuartos
+  {cup:'2010',date:'2 Jul 2010',t1:'🇳🇱 Países Bajos',t2:'🇧🇷 Brasil',g1:2,g2:1,phase:'Cuartos'},
+  {cup:'2010',date:'2 Jul 2010',t1:'🇺🇾 Uruguay',t2:'🇬🇭 Ghana',g1:1,g2:1,phase:'Cuartos',note_es:'pen. Uruguay 4–2',note_en:'pens. Uruguay 4–2'},
+  {cup:'2010',date:'3 Jul 2010',t1:'🇦🇷 Argentina',t2:'🇩🇪 Alemania',g1:0,g2:4,phase:'Cuartos'},
+  {cup:'2010',date:'3 Jul 2010',t1:'🇵🇾 Paraguay',t2:'🇪🇸 España',g1:0,g2:1,phase:'Cuartos'},
+  // Semis
+  {cup:'2010',date:'6 Jul 2010',t1:'🇺🇾 Uruguay',t2:'🇳🇱 Países Bajos',g1:2,g2:3,phase:'Semifinal'},
+  {cup:'2010',date:'7 Jul 2010',t1:'🇩🇪 Alemania',t2:'🇪🇸 España',g1:0,g2:1,phase:'Semifinal'},
+  {cup:'2010',date:'10 Jul 2010',t1:'🇩🇪 Alemania',t2:'🇺🇾 Uruguay',g1:3,g2:2,phase:'3er lugar'},
+  {cup:'2010',date:'11 Jul 2010',t1:'🇳🇱 Países Bajos',t2:'🇪🇸 España',g1:0,g2:1,phase:'Final'},
+
+  // ── BRASIL 2014 ───────────────────────────────────────────
   {cup:'2014',date:'13 Jun 2014',t1:'🇲🇽 México',t2:'🇨🇲 Camerún',g1:1,g2:0,phase:'Grupo A'},
   {cup:'2014',date:'17 Jun 2014',t1:'🇧🇷 Brasil',t2:'🇲🇽 México',g1:0,g2:0,phase:'Grupo A'},
   {cup:'2014',date:'18 Jun 2014',t1:'🇭🇷 Croacia',t2:'🇨🇲 Camerún',g1:4,g2:0,phase:'Grupo A'},
@@ -878,7 +960,7 @@ function render() {
     return;
   }
 
-  const cupCls = {'2026':'u26','2022':'q22','2018':'r18','2014':'b14'};
+  const cupCls = {'2026':'u26','2022':'q22','2018':'r18','2014':'b14','2010':'s10'};
   let lastCup = null;
   let currentTbody = null;
 
@@ -967,6 +1049,9 @@ const API_TEAM_MAP = {
   'Thailand':'🇹🇭 Tailandia','Scotland':'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia','Malawi':'🇲🇼 Malaui',
   'Honduras':'🇭🇳 Honduras','El Salvador':'🇸🇻 El Salvador','Moldova':'🇲🇩 Moldova',
   'Bahamas':'🇧🇸 Bahamas',
+  // 2010 specific
+  'South Africa':'🇿🇦 Sudáfrica','Slovenia':'🇸🇮 Eslovenia',
+  'Paraguay':'🇵🇾 Paraguay','North Korea':'🇰🇵 Corea del Norte',
 };
 
 function setApiBadge(state, textEN, textES) {
